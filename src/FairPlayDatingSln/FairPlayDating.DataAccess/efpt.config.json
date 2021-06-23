@@ -30,6 +30,14 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[Gender]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Religion]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[UserFeedback]",
          "ObjectType": 0
       },
@@ -44,9 +52,13 @@
       {
          "Name": "[dbo].[UserProfile]",
          "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UserReligionPreference]",
+         "ObjectType": 0
       }
    ],
-   "UiHint": "C:\\Projects\\Github\\FairPlayDatng\\src\\FairPlayDatingSln\\FairPlayDating.Database\\FairPlayDating.Database.sqlproj",
+   "UiHint": "C:\\Users\\lsolano\\Source\\Repos\\FairPlayDating\\src\\FairPlayDatingSln\\FairPlayDating.Database\\FairPlayDating.Database.sqlproj",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": false,
    "UseDbContextSplitting": false,

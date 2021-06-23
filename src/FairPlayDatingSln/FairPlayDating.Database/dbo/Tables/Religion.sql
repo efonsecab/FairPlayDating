@@ -1,0 +1,5 @@
+﻿CREATE TABLE [dbo].[Religion]
+(
+	[ReligionId] SMALLINT NOT NULL CONSTRAINT PK_Religion PRIMARY KEY,
+	[Name] VARCHAR(20) NOT NULL
+)
