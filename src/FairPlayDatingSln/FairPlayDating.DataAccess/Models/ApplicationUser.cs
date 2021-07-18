@@ -14,6 +14,7 @@ namespace FairPlayDating.DataAccess.Models
     {
         public ApplicationUser()
         {
+            UserActivity = new HashSet<UserActivity>();
             UserFeedback = new HashSet<UserFeedback>();
             UserInvitation = new HashSet<UserInvitation>();
             UserMessageFromApplicationUser = new HashSet<UserMessage>();
@@ -37,6 +38,8 @@ namespace FairPlayDating.DataAccess.Models
 
         [InverseProperty("ApplicationUser")]
         public virtual ApplicationUserRole ApplicationUserRole { get; set; }
+        [InverseProperty("ApplicationUser")]
+        public virtual ICollection<UserActivity> UserActivity { get; set; }
         [InverseProperty("ApplicationUser")]
         public virtual ICollection<UserFeedback> UserFeedback { get; set; }
         [InverseProperty("InvitingApplicationUser")]

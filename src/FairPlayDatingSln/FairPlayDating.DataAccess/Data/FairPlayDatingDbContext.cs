@@ -19,10 +19,16 @@ namespace FairPlayDating.DataAccess.Data
         {
         }
 
+        public virtual DbSet<Activity> Activity { get; set; }
         public virtual DbSet<ApplicationRole> ApplicationRole { get; set; }
         public virtual DbSet<ApplicationUser> ApplicationUser { get; set; }
         public virtual DbSet<ApplicationUserRole> ApplicationUserRole { get; set; }
         public virtual DbSet<ErrorLog> ErrorLog { get; set; }
+        public virtual DbSet<EyesColor> EyesColor { get; set; }
+        public virtual DbSet<Frequency> Frequency { get; set; }
+        public virtual DbSet<HairColor> HairColor { get; set; }
+        public virtual DbSet<KidStatus> KidStatus { get; set; }
+        public virtual DbSet<UserActivity> UserActivity { get; set; }
         public virtual DbSet<UserFeedback> UserFeedback { get; set; }
         public virtual DbSet<UserInvitation> UserInvitation { get; set; }
         public virtual DbSet<UserMessage> UserMessage { get; set; }
@@ -45,6 +51,27 @@ namespace FairPlayDating.DataAccess.Data
                     .HasForeignKey<ApplicationUserRole>(d => d.ApplicationUserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ApplicationUserRole_ApplicationUser");
+            });
+
+            modelBuilder.Entity<UserActivity>(entity =>
+            {
+                entity.HasOne(d => d.Activity)
+                    .WithMany(p => p.UserActivity)
+                    .HasForeignKey(d => d.ActivityId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserActivity_Activity");
+
+                entity.HasOne(d => d.ApplicationUser)
+                    .WithMany(p => p.UserActivity)
+                    .HasForeignKey(d => d.ApplicationUserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserActivity_ApplicationUser");
+
+                entity.HasOne(d => d.Frequency)
+                    .WithMany(p => p.UserActivity)
+                    .HasForeignKey(d => d.FrequencyId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserActivity_Frequency");
             });
 
             modelBuilder.Entity<UserFeedback>(entity =>
@@ -87,6 +114,30 @@ namespace FairPlayDating.DataAccess.Data
                     .HasForeignKey(d => d.ApplicationUserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ApplicationUserId_UserProfile");
+
+                entity.HasOne(d => d.EyesColor)
+                    .WithMany(p => p.UserProfile)
+                    .HasForeignKey(d => d.EyesColorId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserProfile_EyesColor");
+
+                entity.HasOne(d => d.HairColor)
+                    .WithMany(p => p.UserProfile)
+                    .HasForeignKey(d => d.HairColorId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserProfile_HairColor");
+
+                entity.HasOne(d => d.KidStatus)
+                    .WithMany(p => p.UserProfileKidStatus)
+                    .HasForeignKey(d => d.KidStatusId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserProfile_KidStatus");
+
+                entity.HasOne(d => d.PreferredKidStatus)
+                    .WithMany(p => p.UserProfilePreferredKidStatus)
+                    .HasForeignKey(d => d.PreferredKidStatusId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserProfile_PreferredKidStatus");
             });
 
             OnModelCreatingPartial(modelBuilder);

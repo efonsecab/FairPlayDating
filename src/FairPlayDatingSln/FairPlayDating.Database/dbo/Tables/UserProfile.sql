@@ -5,6 +5,10 @@
 	[About] NVARCHAR(100) NOT NULL, 
     [HairColorId] SMALLINT NOT NULL, 
     [EyesColorId] SMALLINT NOT NULL, 
+    [KidStatusId] SMALLINT NOT NULL, 
+    [PreferredKidStatusId] SMALLINT NOT NULL, 
     CONSTRAINT [FK_UserProfile_HairColor] FOREIGN KEY ([HairColorId]) REFERENCES [HairColor]([HairColorId]), 
-    CONSTRAINT [FK_UserProfile_EyesColor] FOREIGN KEY ([EyesColorId]) REFERENCES [EyesColor]([EyesColorId]) 
+    CONSTRAINT [FK_UserProfile_EyesColor] FOREIGN KEY ([EyesColorId]) REFERENCES [EyesColor]([EyesColorId]),
+    CONSTRAINT [FK_UserProfile_KidStatus] FOREIGN KEY ([KidStatusId]) REFERENCES [KidStatus]([KidStatusId]),
+    CONSTRAINT [FK_UserProfile_PreferredKidStatus] FOREIGN KEY ([PreferredKidStatusId]) REFERENCES [KidStatus]([KidStatusId])
 )

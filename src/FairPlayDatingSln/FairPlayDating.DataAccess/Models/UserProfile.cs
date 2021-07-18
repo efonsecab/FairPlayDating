@@ -17,12 +17,25 @@ namespace FairPlayDating.DataAccess.Models
         [Required]
         [StringLength(100)]
         public string About { get; set; }
-        [Required]
-        [StringLength(100)]
-        public string Topics { get; set; }
+        public short HairColorId { get; set; }
+        public short EyesColorId { get; set; }
+        public short KidStatusId { get; set; }
+        public short PreferredKidStatusId { get; set; }
 
         [ForeignKey(nameof(ApplicationUserId))]
         [InverseProperty("UserProfile")]
         public virtual ApplicationUser ApplicationUser { get; set; }
+        [ForeignKey(nameof(EyesColorId))]
+        [InverseProperty("UserProfile")]
+        public virtual EyesColor EyesColor { get; set; }
+        [ForeignKey(nameof(HairColorId))]
+        [InverseProperty("UserProfile")]
+        public virtual HairColor HairColor { get; set; }
+        [ForeignKey(nameof(KidStatusId))]
+        [InverseProperty("UserProfileKidStatus")]
+        public virtual KidStatus KidStatus { get; set; }
+        [ForeignKey(nameof(PreferredKidStatusId))]
+        [InverseProperty("UserProfilePreferredKidStatus")]
+        public virtual KidStatus PreferredKidStatus { get; set; }
     }
 }
