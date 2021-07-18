@@ -14,6 +14,10 @@
    "SelectedToBeGenerated": 0,
    "Tables": [
       {
+         "Name": "[dbo].[Activity]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[ApplicationRole]",
          "ObjectType": 0
       },
@@ -30,7 +34,31 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[EyesColor]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[Frequency]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[HairColor]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UserActivity]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UserEyesColorPreference]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[UserFeedback]",
+         "ObjectType": 0
+      },
+      {
+         "Name": "[dbo].[UserHairColorPreference]",
          "ObjectType": 0
       },
       {
@@ -42,11 +70,15 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[UserPhoto]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[UserProfile]",
          "ObjectType": 0
       }
    ],
-   "UiHint": "C:\\Projects\\Github\\FairPlayDatng\\src\\FairPlayDatingSln\\FairPlayDating.Database\\FairPlayDating.Database.sqlproj",
+   "UiHint": "C:\\Users\\Federico Jose Lucia\\Source\\Repos\\PTICR\\FairPlayDating\\src\\FairPlayDatingSln\\FairPlayDating.Database\\FairPlayDating.Database.sqlproj",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": false,
    "UseDbContextSplitting": false,

@@ -75,6 +75,9 @@
     <Build Include="dbo\Tables\Activity.sql" />
     <Build Include="dbo\Tables\Frequency.sql" />
     <Build Include="dbo\Tables\UserActivity.sql" />
+    <Build Include="dbo\Tables\UserHairColorPreference.sql" />
+    <Build Include="dbo\Tables\UserEyesColorPreference.sql" />
+    <Build Include="dbo\Tables\UserPhoto.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\PostDeployment\Script.PostDeployment.sql" />
