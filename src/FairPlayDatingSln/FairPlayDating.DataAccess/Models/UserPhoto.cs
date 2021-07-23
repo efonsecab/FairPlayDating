@@ -9,23 +9,24 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FairPlayDating.DataAccess.Models
 {
-    public partial class EyesColor
+    public partial class UserPhoto
     {
-        public EyesColor()
+        public UserPhoto()
         {
-            UserEyesColorPreference = new HashSet<UserEyesColorPreference>();
             UserProfile = new HashSet<UserProfile>();
         }
 
         [Key]
-        public short EyesColorId { get; set; }
+        public long UserPhotoId { get; set; }
+        public long ApplicationUserId { get; set; }
         [Required]
-        [StringLength(50)]
-        public string Name { get; set; }
+        [StringLength(500)]
+        public string PhotoBlobUrl { get; set; }
 
-        [InverseProperty("EyesColor")]
-        public virtual ICollection<UserEyesColorPreference> UserEyesColorPreference { get; set; }
-        [InverseProperty("EyesColor")]
+        [ForeignKey(nameof(ApplicationUserId))]
+        [InverseProperty("UserPhoto")]
+        public virtual ApplicationUser ApplicationUser { get; set; }
+        [InverseProperty("ProfileUserPhoto")]
         public virtual ICollection<UserProfile> UserProfile { get; set; }
     }
 }
