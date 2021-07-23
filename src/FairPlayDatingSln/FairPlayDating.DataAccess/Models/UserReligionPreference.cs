@@ -9,28 +9,18 @@ using Microsoft.EntityFrameworkCore;
 
 namespace FairPlayDating.DataAccess.Models
 {
-    public partial class UserProfile
+    public partial class UserReligionPreference
     {
         [Key]
-        public long UserProfileId { get; set; }
+        public int UserReligionPreferenceId { get; set; }
         public long ApplicationUserId { get; set; }
-        [Required]
-        [StringLength(100)]
-        public string About { get; set; }
-        public short HairColorId { get; set; }
-        public short EyesColorId { get; set; }
-        public short BiologicalGenderId { get; set; }
-        public short CurrentDateObjectiveId { get; set; }
         public short ReligionId { get; set; }
 
         [ForeignKey(nameof(ApplicationUserId))]
-        [InverseProperty("UserProfile")]
+        [InverseProperty("UserReligionPreference")]
         public virtual ApplicationUser ApplicationUser { get; set; }
-        [ForeignKey(nameof(BiologicalGenderId))]
-        [InverseProperty(nameof(Gender.UserProfile))]
-        public virtual Gender BiologicalGender { get; set; }
         [ForeignKey(nameof(ReligionId))]
-        [InverseProperty("UserProfile")]
+        [InverseProperty("UserReligionPreference")]
         public virtual Religion Religion { get; set; }
     }
 }

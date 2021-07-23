@@ -23,10 +23,13 @@ namespace FairPlayDating.DataAccess.Data
         public virtual DbSet<ApplicationUser> ApplicationUser { get; set; }
         public virtual DbSet<ApplicationUserRole> ApplicationUserRole { get; set; }
         public virtual DbSet<ErrorLog> ErrorLog { get; set; }
+        public virtual DbSet<Gender> Gender { get; set; }
+        public virtual DbSet<Religion> Religion { get; set; }
         public virtual DbSet<UserFeedback> UserFeedback { get; set; }
         public virtual DbSet<UserInvitation> UserInvitation { get; set; }
         public virtual DbSet<UserMessage> UserMessage { get; set; }
         public virtual DbSet<UserProfile> UserProfile { get; set; }
+        public virtual DbSet<UserReligionPreference> UserReligionPreference { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -45,6 +48,20 @@ namespace FairPlayDating.DataAccess.Data
                     .HasForeignKey<ApplicationUserRole>(d => d.ApplicationUserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ApplicationUserRole_ApplicationUser");
+            });
+
+            modelBuilder.Entity<Gender>(entity =>
+            {
+                entity.Property(e => e.GenderId).ValueGeneratedNever();
+
+                entity.Property(e => e.Name).IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Religion>(entity =>
+            {
+                entity.Property(e => e.ReligionId).ValueGeneratedNever();
+
+                entity.Property(e => e.Name).IsUnicode(false);
             });
 
             modelBuilder.Entity<UserFeedback>(entity =>
@@ -87,6 +104,33 @@ namespace FairPlayDating.DataAccess.Data
                     .HasForeignKey(d => d.ApplicationUserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ApplicationUserId_UserProfile");
+
+                entity.HasOne(d => d.BiologicalGender)
+                    .WithMany(p => p.UserProfile)
+                    .HasForeignKey(d => d.BiologicalGenderId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserProfile_BiologicalGenderId");
+
+                entity.HasOne(d => d.Religion)
+                    .WithMany(p => p.UserProfile)
+                    .HasForeignKey(d => d.ReligionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserProfile_ReligionId");
+            });
+
+            modelBuilder.Entity<UserReligionPreference>(entity =>
+            {
+                entity.HasOne(d => d.ApplicationUser)
+                    .WithMany(p => p.UserReligionPreference)
+                    .HasForeignKey(d => d.ApplicationUserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Fk_UserReligionPreference_ApplicationUserId");
+
+                entity.HasOne(d => d.Religion)
+                    .WithMany(p => p.UserReligionPreference)
+                    .HasForeignKey(d => d.ReligionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Fk_UserReligionPreference_ReligionId");
             });
 
             OnModelCreatingPartial(modelBuilder);
