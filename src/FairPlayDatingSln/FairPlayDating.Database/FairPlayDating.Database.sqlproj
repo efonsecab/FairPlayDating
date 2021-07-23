@@ -75,6 +75,7 @@
     <Build Include="dbo\Tables\Activity.sql" />
     <Build Include="dbo\Tables\Frequency.sql" />
     <Build Include="dbo\Tables\UserActivity.sql" />
+    <Build Include="dbo\Tables\KidStatus.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\PostDeployment\Script.PostDeployment.sql" />
