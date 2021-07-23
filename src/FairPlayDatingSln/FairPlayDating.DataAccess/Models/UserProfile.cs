@@ -25,6 +25,8 @@ namespace FairPlayDating.DataAccess.Models
         public double CurrentLatitude { get; set; }
         public double CurrentLongitude { get; set; }
         public long ProfileUserPhotoId { get; set; }
+        public short KidStatusId { get; set; }
+        public short PreferredKidStatusId { get; set; }
 
         [ForeignKey(nameof(ApplicationUserId))]
         [InverseProperty("UserProfile")]
@@ -41,6 +43,12 @@ namespace FairPlayDating.DataAccess.Models
         [ForeignKey(nameof(HairColorId))]
         [InverseProperty("UserProfile")]
         public virtual HairColor HairColor { get; set; }
+        [ForeignKey(nameof(KidStatusId))]
+        [InverseProperty("UserProfileKidStatus")]
+        public virtual KidStatus KidStatus { get; set; }
+        [ForeignKey(nameof(PreferredKidStatusId))]
+        [InverseProperty("UserProfilePreferredKidStatus")]
+        public virtual KidStatus PreferredKidStatus { get; set; }
         [ForeignKey(nameof(ProfileUserPhotoId))]
         [InverseProperty(nameof(UserPhoto.UserProfile))]
         public virtual UserPhoto ProfileUserPhoto { get; set; }

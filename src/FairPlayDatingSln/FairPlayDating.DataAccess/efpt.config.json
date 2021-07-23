@@ -54,6 +54,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[KidStatus]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[Religion]",
          "ObjectType": 0
       },

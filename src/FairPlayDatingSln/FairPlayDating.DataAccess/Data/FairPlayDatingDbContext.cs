@@ -29,6 +29,7 @@ namespace FairPlayDating.DataAccess.Data
         public virtual DbSet<Frequency> Frequency { get; set; }
         public virtual DbSet<Gender> Gender { get; set; }
         public virtual DbSet<HairColor> HairColor { get; set; }
+        public virtual DbSet<KidStatus> KidStatus { get; set; }
         public virtual DbSet<Religion> Religion { get; set; }
         public virtual DbSet<UserActivity> UserActivity { get; set; }
         public virtual DbSet<UserEyesColorPreference> UserEyesColorPreference { get; set; }
@@ -204,6 +205,18 @@ namespace FairPlayDating.DataAccess.Data
                     .HasForeignKey(d => d.HairColorId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UserProfile_HairColor");
+
+                entity.HasOne(d => d.KidStatus)
+                    .WithMany(p => p.UserProfileKidStatus)
+                    .HasForeignKey(d => d.KidStatusId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserProfile_KidStatus");
+
+                entity.HasOne(d => d.PreferredKidStatus)
+                    .WithMany(p => p.UserProfilePreferredKidStatus)
+                    .HasForeignKey(d => d.PreferredKidStatusId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserProfile_PreferredKidStatus");
 
                 entity.HasOne(d => d.ProfileUserPhoto)
                     .WithMany(p => p.UserProfile)

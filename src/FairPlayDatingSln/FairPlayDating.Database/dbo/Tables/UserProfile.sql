@@ -11,10 +11,14 @@
     [CurrentLatitude] FLOAT NOT NULL,
     [CurrentLongitude] FLOAT NOT NULL,
     [ProfileUserPhotoId] BIGINT NOT NULL,
+    [KidStatusId] SMALLINT NOT NULL, 
+    [PreferredKidStatusId] SMALLINT NOT NULL, 
     CONSTRAINT [FK_UserProfile_HairColor] FOREIGN KEY ([HairColorId]) REFERENCES [HairColor]([HairColorId]), 
     CONSTRAINT [FK_UserProfile_EyesColor] FOREIGN KEY ([EyesColorId]) REFERENCES [EyesColor]([EyesColorId]),
     CONSTRAINT [FK_UserProfile_BiologicalGenderId] FOREIGN KEY ([BiologicalGenderId]) REFERENCES [Gender]([GenderId]),
     CONSTRAINT [FK_UserProfile_CurrentDateObjectiveId] FOREIGN KEY ([CurrentDateObjectiveId]) REFERENCES [DateObjective]([DateObjectiveId]),
     CONSTRAINT [FK_UserProfile_ReligionId] FOREIGN KEY ([ReligionId]) REFERENCES [Religion]([ReligionId]),
-    CONSTRAINT [FK_UserProfile_UserPhoto] FOREIGN KEY ([ProfileUserPhotoId]) REFERENCES [UserPhoto]([UserPhotoId]) 
+    CONSTRAINT [FK_UserProfile_UserPhoto] FOREIGN KEY ([ProfileUserPhotoId]) REFERENCES [UserPhoto]([UserPhotoId]),
+    CONSTRAINT [FK_UserProfile_KidStatus] FOREIGN KEY ([KidStatusId]) REFERENCES [KidStatus]([KidStatusId]),
+    CONSTRAINT [FK_UserProfile_PreferredKidStatus] FOREIGN KEY ([PreferredKidStatusId]) REFERENCES [KidStatus]([KidStatusId])
 )

@@ -82,6 +82,7 @@
     <Build Include="dbo\Tables\UserHairColorPreference.sql" />
     <Build Include="dbo\Tables\UserEyesColorPreference.sql" />
     <Build Include="dbo\Tables\UserPhoto.sql" />
+    <Build Include="dbo\Tables\KidStatus.sql" />
   </ItemGroup>
   <ItemGroup>
     <PostDeploy Include="Scripts\PostDeployment\Script.PostDeployment.sql" />
