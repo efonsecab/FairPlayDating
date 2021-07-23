@@ -23,6 +23,7 @@ namespace FairPlayDating.DataAccess.Models
             UserMessageToApplicationUser = new HashSet<UserMessage>();
             UserPhoto = new HashSet<UserPhoto>();
             UserProfile = new HashSet<UserProfile>();
+            UserReligionPreference = new HashSet<UserReligionPreference>();
         }
 
         [Key]
@@ -59,5 +60,7 @@ namespace FairPlayDating.DataAccess.Models
         public virtual ICollection<UserPhoto> UserPhoto { get; set; }
         [InverseProperty("ApplicationUser")]
         public virtual ICollection<UserProfile> UserProfile { get; set; }
+        [InverseProperty("ApplicationUser")]
+        public virtual ICollection<UserReligionPreference> UserReligionPreference { get; set; }
     }
 }

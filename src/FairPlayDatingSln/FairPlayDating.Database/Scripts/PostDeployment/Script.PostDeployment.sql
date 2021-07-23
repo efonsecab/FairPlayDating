@@ -89,3 +89,76 @@ BEGIN
     INSERT INTO [dbo].[Activity]([ActivityId],[Name]) VALUES(@ACTIVITYID, @ACTIVITYNAME)
 END
 SET IDENTITY_INSERT [dbo].[Activity] OFF
+
+DECLARE @MALE VARCHAR(20) = 'Male'
+DECLARE @MALE_ID SMALLINT = 1
+DECLARE @FEMALE VARCHAR(20) = 'Female'
+DECLARE @FEMALE_ID SMALLINT = 2
+
+IF NOT EXISTS (SELECT 1 FROM [dbo].[Gender] WHERE [Name] = @MALE)
+BEGIN
+    INSERT INTO [dbo].[Gender]([GenderId],[Name]) VALUES (@MALE_ID,@MALE)
+END
+
+IF NOT EXISTS (SELECT 1 FROM [dbo].[Gender] WHERE [Name] = @FEMALE)
+BEGIN
+    INSERT INTO [dbo].[Gender]([GenderId],[Name]) VALUES (@FEMALE_ID,@FEMALE)
+END
+
+DECLARE @Catholic VARCHAR(20) = 'Catholic'
+DECLARE @Catholic_ID SMALLINT = 1
+DECLARE @Christian VARCHAR(20) = 'Christian'
+DECLARE @Christian_ID SMALLINT = 2
+DECLARE @Jewish VARCHAR(20) = 'Jewish'
+DECLARE @Jewish_ID SMALLINT = 3
+DECLARE @Muslim VARCHAR(20) = 'Muslim'
+DECLARE @Muslim_ID SMALLINT = 4
+DECLARE @Other VARCHAR(20) = 'Other'
+DECLARE @Other_ID SMALLINT = 4
+
+IF NOT EXISTS (SELECT 1 FROM [dbo].[Religion] WHERE [Name] = @Catholic)
+BEGIN
+    INSERT INTO [dbo].[Religion]([ReligionId],[Name]) VALUES (@Catholic_ID,@Catholic)
+END
+
+IF NOT EXISTS (SELECT 1 FROM [dbo].[Religion] WHERE [Name] = @Christian)
+BEGIN
+    INSERT INTO [dbo].[Religion]([ReligionId],[Name]) VALUES (@Christian_ID,@Christian)
+END
+
+IF NOT EXISTS (SELECT 1 FROM [dbo].[Religion] WHERE [Name] = @Jewish)
+BEGIN
+    INSERT INTO [dbo].[Religion]([ReligionId],[Name]) VALUES (@Jewish_ID,@Jewish)
+END
+
+IF NOT EXISTS (SELECT 1 FROM [dbo].[Religion] WHERE [Name] = @Muslim)
+BEGIN
+    INSERT INTO [dbo].[Religion]([ReligionId],[Name]) VALUES (@Muslim_ID,@Muslim)
+END
+
+IF NOT EXISTS (SELECT 1 FROM [dbo].[Religion] WHERE [Name] = @Other)
+BEGIN
+    INSERT INTO [dbo].[Religion]([ReligionId],[Name]) VALUES (@Other_ID,@Other)
+END
+
+DECLARE @FRIENDSHIP VARCHAR(20) = 'Friendship'
+DECLARE @FRIENDSHIP_ID SMALLINT = 1
+DECLARE @DATING VARCHAR(20) = 'Dating'
+DECLARE @DATING_ID SMALLINT = 2
+DECLARE @MARRIAGE VARCHAR(20) = 'Marriage'
+DECLARE @MARRIAGE_ID SMALLINT = 3
+
+IF NOT EXISTS (SELECT 1 FROM [dbo].[DateObjective] WHERE [Name] = @FRIENDSHIP)
+BEGIN
+    INSERT INTO [dbo].[DateObjective]([DateObjectiveId],[Name]) VALUES (@FRIENDSHIP_ID,@FRIENDSHIP)
+END
+
+IF NOT EXISTS (SELECT 1 FROM [dbo].[DateObjective] WHERE [Name] = @DATING)
+BEGIN
+    INSERT INTO [dbo].[DateObjective]([DateObjectiveId],[Name]) VALUES (@DATING_ID,@DATING)
+END
+
+IF NOT EXISTS (SELECT 1 FROM [dbo].[DateObjective] WHERE [Name] = @MARRIAGE)
+BEGIN
+    INSERT INTO [dbo].[DateObjective]([DateObjectiveId],[Name]) VALUES (@MARRIAGE_ID,@MARRIAGE)
+END

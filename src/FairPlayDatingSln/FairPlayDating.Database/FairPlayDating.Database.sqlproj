@@ -75,6 +75,10 @@
     <Build Include="dbo\Tables\Activity.sql" />
     <Build Include="dbo\Tables\Frequency.sql" />
     <Build Include="dbo\Tables\UserActivity.sql" />
+    <Build Include="dbo\Tables\Gender.sql" />
+    <Build Include="dbo\Tables\Religion.sql" />
+    <Build Include="dbo\Tables\DateObjective.sql" />
+    <Build Include="dbo\Tables\UserReligionPreference.sql" />
     <Build Include="dbo\Tables\UserHairColorPreference.sql" />
     <Build Include="dbo\Tables\UserEyesColorPreference.sql" />
     <Build Include="dbo\Tables\UserPhoto.sql" />

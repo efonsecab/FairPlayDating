@@ -23,10 +23,13 @@ namespace FairPlayDating.DataAccess.Data
         public virtual DbSet<ApplicationRole> ApplicationRole { get; set; }
         public virtual DbSet<ApplicationUser> ApplicationUser { get; set; }
         public virtual DbSet<ApplicationUserRole> ApplicationUserRole { get; set; }
+        public virtual DbSet<DateObjective> DateObjective { get; set; }
         public virtual DbSet<ErrorLog> ErrorLog { get; set; }
         public virtual DbSet<EyesColor> EyesColor { get; set; }
         public virtual DbSet<Frequency> Frequency { get; set; }
+        public virtual DbSet<Gender> Gender { get; set; }
         public virtual DbSet<HairColor> HairColor { get; set; }
+        public virtual DbSet<Religion> Religion { get; set; }
         public virtual DbSet<UserActivity> UserActivity { get; set; }
         public virtual DbSet<UserEyesColorPreference> UserEyesColorPreference { get; set; }
         public virtual DbSet<UserFeedback> UserFeedback { get; set; }
@@ -35,6 +38,7 @@ namespace FairPlayDating.DataAccess.Data
         public virtual DbSet<UserMessage> UserMessage { get; set; }
         public virtual DbSet<UserPhoto> UserPhoto { get; set; }
         public virtual DbSet<UserProfile> UserProfile { get; set; }
+        public virtual DbSet<UserReligionPreference> UserReligionPreference { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -53,6 +57,27 @@ namespace FairPlayDating.DataAccess.Data
                     .HasForeignKey<ApplicationUserRole>(d => d.ApplicationUserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ApplicationUserRole_ApplicationUser");
+            });
+
+            modelBuilder.Entity<DateObjective>(entity =>
+            {
+                entity.Property(e => e.DateObjectiveId).ValueGeneratedNever();
+
+                entity.Property(e => e.Name).IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Gender>(entity =>
+            {
+                entity.Property(e => e.GenderId).ValueGeneratedNever();
+
+                entity.Property(e => e.Name).IsUnicode(false);
+            });
+
+            modelBuilder.Entity<Religion>(entity =>
+            {
+                entity.Property(e => e.ReligionId).ValueGeneratedNever();
+
+                entity.Property(e => e.Name).IsUnicode(false);
             });
 
             modelBuilder.Entity<UserActivity>(entity =>
@@ -156,6 +181,18 @@ namespace FairPlayDating.DataAccess.Data
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ApplicationUserId_UserProfile");
 
+                entity.HasOne(d => d.BiologicalGender)
+                    .WithMany(p => p.UserProfile)
+                    .HasForeignKey(d => d.BiologicalGenderId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserProfile_BiologicalGenderId");
+
+                entity.HasOne(d => d.CurrentDateObjective)
+                    .WithMany(p => p.UserProfile)
+                    .HasForeignKey(d => d.CurrentDateObjectiveId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserProfile_CurrentDateObjectiveId");
+
                 entity.HasOne(d => d.EyesColor)
                     .WithMany(p => p.UserProfile)
                     .HasForeignKey(d => d.EyesColorId)
@@ -173,6 +210,27 @@ namespace FairPlayDating.DataAccess.Data
                     .HasForeignKey(d => d.ProfileUserPhotoId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UserProfile_UserPhoto");
+
+                entity.HasOne(d => d.Religion)
+                    .WithMany(p => p.UserProfile)
+                    .HasForeignKey(d => d.ReligionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserProfile_ReligionId");
+            });
+
+            modelBuilder.Entity<UserReligionPreference>(entity =>
+            {
+                entity.HasOne(d => d.ApplicationUser)
+                    .WithMany(p => p.UserReligionPreference)
+                    .HasForeignKey(d => d.ApplicationUserId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Fk_UserReligionPreference_ApplicationUserId");
+
+                entity.HasOne(d => d.Religion)
+                    .WithMany(p => p.UserReligionPreference)
+                    .HasForeignKey(d => d.ReligionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("Fk_UserReligionPreference_ReligionId");
             });
 
             OnModelCreatingPartial(modelBuilder);
