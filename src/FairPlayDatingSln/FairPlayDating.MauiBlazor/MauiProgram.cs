@@ -1,4 +1,5 @@
-﻿using FairPlayDating.Common.Global;
+﻿using FairPlayDating.ClientServices;
+using FairPlayDating.Common.Global;
 using FairPlayDating.MauiBlazor.Authentication;
 using FairPlayDating.MauiBlazor.Data;
 using FairPlayDating.MauiBlazor.Features.LogOn;
@@ -38,13 +39,52 @@ namespace FairPlayDating.MauiBlazor
             services.AddScoped<AuthenticationStateProvider, CustomAuthStateProvider>();
 
             string assemblyName = Constants.Names.ApplicationName;
-            string fairPlayTubeapiAddress = builder.Configuration["ApiBaseUrl"];
+            string fairPlayDatingIpAddress = builder.Configuration["ApiBaseUrl"];
             B2CConstants b2CConstants = builder.Configuration.GetSection("B2CConstants").Get<B2CConstants>();
             builder.Services.AddSingleton(b2CConstants);
-
             builder.Services.AddSingleton<WeatherForecastService>();
+
+            services.AddScoped<BaseAddressAuthorizationMessageHandler>();
+            services.AddHttpClient($"{assemblyName}.ServerAPI", client =>
+        client.BaseAddress = new Uri(fairPlayDatingIpAddress))
+        //.AddHttpMessageHandler<LocalizationMessageHandler>()
+        .AddHttpMessageHandler<BaseAddressAuthorizationMessageHandler>();
+
+            services.AddHttpClient($"{assemblyName}.ServerAPI.Anonymous", client =>
+                client.BaseAddress = new Uri(fairPlayDatingIpAddress));
+          //      .AddHttpMessageHandler<LocalizationMessageHandler>();
+
+            services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
+                .CreateClient($"{assemblyName}.ServerAPI"));
+
+            services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
+                .CreateClient($"{assemblyName}.ServerAPI.Anonymous"));
+
+
+            services.AddTransient<HttpClientService>();
+            services.AddTransient<FacebookClientService>();
 
             return builder.Build();
         }
     }
+
+    public class BaseAddressAuthorizationMessageHandler : DelegatingHandler
+    {
+        protected override HttpResponseMessage Send(HttpRequestMessage request, CancellationToken cancellationToken)
+        {
+            AddAuthToken(request);
+            return base.Send(request, cancellationToken);
+        }
+        protected override async Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
+        {
+            AddAuthToken(request);
+            return await base.SendAsync(request, cancellationToken);
+        }
+
+        private void AddAuthToken(HttpRequestMessage request)
+        {
+            request.Headers.Authorization = new System.Net.Http.Headers
+                .AuthenticationHeaderValue("bearer", UserState.UserContext.AccessToken);
+        }
+    }    
 }

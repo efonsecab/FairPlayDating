@@ -65,6 +65,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
+	  <ProjectReference Include="..\FairPlayDating.ClientServices\FairPlayDating.ClientServices.csproj" />
 	  <ProjectReference Include="..\FairPlayDating.Common\FairPlayDating.Common.csproj" />
 	</ItemGroup>
 

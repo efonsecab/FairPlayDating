@@ -21,5 +21,6 @@ namespace FairPlayDating.MauiBlazor.Features.LogOn
         public string StreetAddress { get; internal set; }
         public string City { get; internal set; }
         public string AccessToken { get; internal set; }
+        public string Idp_Access_Token { get; internal set; }
     }
 }

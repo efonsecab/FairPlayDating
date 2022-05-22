@@ -11,7 +11,14 @@
         </div>
     </div>
     <div class="main-page-content">
-        @Body
+        @if (!HasInternet)
+        {
+            <h1>Unable to Access the Internet</h1>
+        }
+        else
+        {
+            @Body
+        }
     </div>
     <div class="footer-section">
         <div class="footer-icons-section">

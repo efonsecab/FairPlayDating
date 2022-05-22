@@ -15,11 +15,34 @@ namespace FairPlayDating.MauiBlazor.Shared
         private B2CConstants B2CConstants { get; set; }
         [Inject]
         private NavigationManager NavigationManager { get; set; }
+        public bool HasInternet { get; private set; }
+
         protected override async Task OnInitializedAsync()
         {
-            if (!UserState.UserContext.IsLoggedOn)
+            Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
+            if (Connectivity.Current.NetworkAccess == NetworkAccess.None)
+                this.HasInternet = false;
+            if (this.HasInternet && !UserState.UserContext.IsLoggedOn)
             {
                 await Login();
+            }
+        }
+
+        private async void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        {
+            switch (e.NetworkAccess)
+            {
+                case NetworkAccess.Internet:
+                    HasInternet = true;
+                    if (!UserState.UserContext.IsLoggedOn)
+                    {
+                        await Login();
+                        StateHasChanged();
+                    }
+                    break;
+                default:
+                    HasInternet = false;
+                    break;
             }
         }
 
@@ -51,9 +74,10 @@ namespace FairPlayDating.MauiBlazor.Shared
                 {
                     AccessToken = authResult.AccessToken,
                     IsLoggedOn = true,
-                    UserIdentifier = authResult.UniqueId
+                    UserIdentifier = authResult.UniqueId,
+                    Idp_Access_Token = authResult.ClaimsPrincipal.Claims.Single(p => p.Type == "idp_access_token").Value
                 };
-                NavigationManager.NavigateTo("/", true);
+                //NavigationManager.NavigateTo("/", true);
                 DisplayBasicTokenInfo(authResult);
                 UpdateSignInState(true);
             }
