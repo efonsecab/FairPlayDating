@@ -15,7 +15,7 @@
         {
             <h1>Unable to Access the Internet</h1>
         }
-        else
+        else if (Features.LogOn.UserState.UserContext?.IsLoggedOn == true)
         {
             @Body
         }

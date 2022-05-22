@@ -1,5 +1,23 @@
 ﻿<h3>MyAlbums</h3>
 
-@code {
-
+@if (this.MyAlbumsPage != null)
+{
+    <div class="container">
+        <div class="row row-cols-1 row-cols-md-2 row-cols-lg-3">
+            @foreach (var singleAlbum in this.MyAlbumsPage.data)
+            {
+                <div class="col">
+                    <div class="card" style="width: 100%;">
+                        <a @onclick="( async () => await OnAlbumImageClicked(singleAlbum))">
+                            <img src="@singleAlbum.picture.data.url" style="height:300px" alt="...">
+                        </a>
+                        <div class="card-body">
+                            <h5 class="card-title">@singleAlbum.name</h5>
+                            <p class="card-text">@singleAlbum.description</p>
+                        </div>
+                    </div>
+                </div>
+            }
+        </div>
+    </div>
 }

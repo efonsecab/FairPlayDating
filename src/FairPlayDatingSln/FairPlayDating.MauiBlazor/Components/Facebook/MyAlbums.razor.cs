@@ -17,7 +17,19 @@ namespace FairPlayDating.MauiBlazor.Components.Facebook
 
         protected override async Task OnInitializedAsync()
         {
-            this.MyAlbumsPage = await this.FacebookClientService.GetMyAlbums();
+            try
+            {
+                this.MyAlbumsPage = await this.FacebookClientService.GetMyAlbums();
+            }
+            catch (Exception ex)
+            {
+                throw;
+            }
+        }
+
+        private async Task OnAlbumImageClicked(Datum album)
+        {
+            await Task.Yield();
         }
     }
 }

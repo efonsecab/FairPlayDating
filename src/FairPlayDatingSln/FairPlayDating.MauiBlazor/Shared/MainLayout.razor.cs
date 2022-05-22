@@ -20,8 +20,15 @@ namespace FairPlayDating.MauiBlazor.Shared
         protected override async Task OnInitializedAsync()
         {
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
-            if (Connectivity.Current.NetworkAccess == NetworkAccess.None)
-                this.HasInternet = false;
+            switch (Connectivity.NetworkAccess)
+            {
+                case NetworkAccess.None:
+                    HasInternet = false;
+                    break;
+                case NetworkAccess.Internet:
+                    HasInternet = true;
+                    break;
+            }
             if (this.HasInternet && !UserState.UserContext.IsLoggedOn)
             {
                 await Login();
@@ -33,10 +40,10 @@ namespace FairPlayDating.MauiBlazor.Shared
             switch (e.NetworkAccess)
             {
                 case NetworkAccess.Internet:
-                    HasInternet = true;
                     if (!UserState.UserContext.IsLoggedOn)
                     {
                         await Login();
+                        HasInternet = true;
                         StateHasChanged();
                     }
                     break;

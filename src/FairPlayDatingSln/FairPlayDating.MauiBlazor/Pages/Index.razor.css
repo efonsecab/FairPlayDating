@@ -10,3 +10,8 @@
     grid-column: 1/4;
     text-align:center;
 }
+.index-content {
+    display: grid;
+    grid-row: 2/3;
+    grid-column: 1/4;
+}
