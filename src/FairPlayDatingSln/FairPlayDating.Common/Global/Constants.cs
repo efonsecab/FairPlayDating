@@ -4,6 +4,10 @@ namespace FairPlayDating.Common.Global
 {
     public static class Constants
     {
+        public class Names
+        {
+            public const string ApplicationName = "FairPlayDating";
+        }
         public class Hubs
         {
             public const string NotificationHub = "/NotificationHub";

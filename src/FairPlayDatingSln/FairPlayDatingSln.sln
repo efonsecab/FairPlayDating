@@ -17,7 +17,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FairPlayDating.Models", "Fa
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FairPlayDating.Server.Tests", "FairPlayDating\FairPlayDating.Server.Tests\FairPlayDating.Server.Tests.csproj", "{B1C775B3-EB70-4483-A5CE-F05852F07B32}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FairPlayDating.MauiBlazor", "FairPlayDating.MauiBlazor\FairPlayDating.MauiBlazor.csproj", "{ADD31EB7-97E0-4F0D-885C-27AC80C788C5}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FairPlayDating.MauiBlazor", "FairPlayDating.MauiBlazor\FairPlayDating.MauiBlazor.csproj", "{ADD31EB7-97E0-4F0D-885C-27AC80C788C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

@@ -1,0 +1,12 @@
+﻿.index-root-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
+    height: 100vh;
+}
+.index-title {
+    display: grid;
+    grid-row: 1/2;
+    grid-column: 1/4;
+    text-align:center;
+}

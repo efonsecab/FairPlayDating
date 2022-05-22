@@ -28,3 +28,20 @@
     overflow-x: hidden;
     overflow-y: scroll;
 }
+.main-page-content {
+    grid-column: 1/4;
+    grid-row: 2/3;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}
+.footer-section {
+    grid-row: 3/4;
+    grid-column: 1/4;
+    height: 100%;
+    background-color: darkred;
+}
+.footer-icons-section {
+    text-align: center;
+    position: relative;
+    top: 50%;
+}
