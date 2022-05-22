@@ -1,0 +1,30 @@
+.root-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr 1fr;
+    grid-template-rows: 1fr 2fr 1fr;
+    height: 100vh;
+}
+
+.root-grid-header {
+    display: grid;
+    grid-row: 1/2;
+    grid-column: 1/4;
+    background-color: darkred;
+}
+
+.logo-section {
+    align-self: center;
+    grid-row: 1/2;
+    grid-column: 2/3;
+    height: 100%;
+}
+
+.logo-image {
+}
+
+.main-page-content {
+    grid-column: 1/4;
+    grid-row: 2/3;
+    overflow-x: hidden;
+    overflow-y: scroll;
+}

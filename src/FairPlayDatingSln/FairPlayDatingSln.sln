@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio Version 16
-VisualStudioVersion = 16.0.31321.278
+# Visual Studio Version 17
+VisualStudioVersion = 17.3.32505.426
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FairPlayDating.Server", "FairPlayDating\Server\FairPlayDating.Server.csproj", "{A6A9682C-5EAE-45ED-94FC-4C8DE96DEA20}"
 EndProject
@@ -15,7 +15,9 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FairPlayDating.DataAccess",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FairPlayDating.Models", "FairPlayDating.Models\FairPlayDating.Models.csproj", "{240EA8B3-E0CA-462D-8D89-EA90A976A3FB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FairPlayDating.Server.Tests", "FairPlayDating\FairPlayDating.Server.Tests\FairPlayDating.Server.Tests.csproj", "{B1C775B3-EB70-4483-A5CE-F05852F07B32}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FairPlayDating.Server.Tests", "FairPlayDating\FairPlayDating.Server.Tests\FairPlayDating.Server.Tests.csproj", "{B1C775B3-EB70-4483-A5CE-F05852F07B32}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FairPlayDating.MauiBlazor", "FairPlayDating.MauiBlazor\FairPlayDating.MauiBlazor.csproj", "{ADD31EB7-97E0-4F0D-885C-27AC80C788C5}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -53,6 +55,12 @@ Global
 		{B1C775B3-EB70-4483-A5CE-F05852F07B32}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{B1C775B3-EB70-4483-A5CE-F05852F07B32}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{B1C775B3-EB70-4483-A5CE-F05852F07B32}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADD31EB7-97E0-4F0D-885C-27AC80C788C5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADD31EB7-97E0-4F0D-885C-27AC80C788C5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADD31EB7-97E0-4F0D-885C-27AC80C788C5}.Debug|Any CPU.Deploy.0 = Debug|Any CPU
+		{ADD31EB7-97E0-4F0D-885C-27AC80C788C5}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADD31EB7-97E0-4F0D-885C-27AC80C788C5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADD31EB7-97E0-4F0D-885C-27AC80C788C5}.Release|Any CPU.Deploy.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
