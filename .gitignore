@@ -350,3 +350,4 @@ MigrationBackup/
 .ionide/
 /src/FairPlayDatingSln/FairPlayDating/Client/wwwroot/appsettings.Development.json
 /src/FairPlayDatingSln/FairPlayDating.MauiBlazor/appsettings.Development.json
+/src/FairPlayDatingSln/FairPlayDating.MauiBlazor/appsettings.json
