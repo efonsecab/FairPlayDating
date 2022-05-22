@@ -1,14 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using FairPlayDating.Common.Global;
 using System.Net.Http;
-using System.Threading.Tasks;
 
-namespace FairPlayDating.Client.ClientServices
+namespace FairPlayDating.ClientServices
 {
     public class HttpClientService
     {
-        private const string AssemblyName = "FairPlayDating";
+        private const string AssemblyName = Constants.Names.ApplicationName;
         private IHttpClientFactory HttpClientFactory { get; }
         public HttpClientService(IHttpClientFactory httpClientFactory)
         {

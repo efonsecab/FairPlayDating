@@ -1,13 +1,8 @@
-﻿using FairPlayDating.Client.ClientServices;
-using FairPlayDating.Common;
+﻿using FairPlayDating.ClientServices;
 using FairPlayDating.Common.Global;
+using FairPlayDating.Models.Facebook.GetMyAlbums;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
-using PTI.Microservices.Library.Models.FacebookGraph.GetMyAlbums;
-using PTI.Microservices.Library.Models.FacebookGraph.GetMyPhotos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace FairPlayDating.Client.Pages.Users

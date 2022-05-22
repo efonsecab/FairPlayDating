@@ -1,14 +1,9 @@
-﻿using FairPlayDating.Common;
-using FairPlayDating.Common.Global;
-using PTI.Microservices.Library.Models.FacebookGraph.GetMyAlbums;
-using PTI.Microservices.Library.Models.FacebookGraph.GetMyPhotos;
-using System;
-using System.Collections.Generic;
-using System.Linq;
+﻿using FairPlayDating.Common.Global;
+using FairPlayDating.Models.Facebook.GetMyAlbums;
+using FairPlayDating.Models.Facebook.GetMyPhotos;
 using System.Net.Http.Json;
-using System.Threading.Tasks;
 
-namespace FairPlayDating.Client.ClientServices
+namespace FairPlayDating.ClientServices
 {
     public class FacebookClientService
     {
@@ -19,7 +14,7 @@ namespace FairPlayDating.Client.ClientServices
         }
 
 
-        public async Task<GetMyPhotosResponse> GetMyPhotos(string pageToken=null)
+        public async Task<GetMyPhotosResponse> GetMyPhotos(string pageToken = null)
         {
             string requestUrl = $"{Constants.ApiRoutes.GetMyPhotos}?pageToken={pageToken}";
             var authorizedHttpClinet = this.HttpClientService.CreateAuthorizedClient();
