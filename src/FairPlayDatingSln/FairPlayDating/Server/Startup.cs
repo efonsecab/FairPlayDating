@@ -260,7 +260,7 @@ namespace FairPlayDating.Server
                 });
             });
 
-            app.UseHttpsRedirection();
+            //app.UseHttpsRedirection();
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
 
