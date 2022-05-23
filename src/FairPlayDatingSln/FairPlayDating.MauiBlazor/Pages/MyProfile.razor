@@ -7,12 +7,17 @@
     <div class="myprofile-content">
         @if (AllActivities != null)
         {
-            <select class="form-control">
-                @foreach (var singleActivity in this.AllActivities)
-                {
-                    <option value="@singleActivity.ActivityId">@singleActivity.Name</option>
-                }
-            </select>
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
+                    Select an Activity
+                </button>
+                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
+                    @foreach (var singleActivity in this.AllActivities)
+                    {
+                     <li><a class="dropdown-item">@singleActivity.Name</a></li>   
+                    }
+                </ul>
+            </div>
         }
     </div>
 </div>
