@@ -2,6 +2,7 @@
 using FairPlayDating.DataAccess.Data;
 using FairPlayDating.DataAccess.Models;
 using FairPlayDating.Models.Activity;
+using FairPlayDating.Services;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -17,22 +18,23 @@ namespace FairPlayDating.Server.Controllers
     [Authorize]
     public class ActivityController : ControllerBase
     {
-        private FairPlayDatingDbContext _fairPlayDatingDbContext;
         private IMapper _mapper;
+        private ActivityService _activityService;
 
-        public ActivityController(FairPlayDatingDbContext fairPlayDatingDbContext, 
+        public ActivityController(ActivityService activityService, 
             IMapper mapper)
         {
-            _fairPlayDatingDbContext = fairPlayDatingDbContext;
             _mapper = mapper;
+            _activityService = activityService;
         }
 
         [HttpGet("[action]")]
         public async Task<ActivityModel[]> GetAllActivities(CancellationToken cancellationToken)
         {
-            var result = await _fairPlayDatingDbContext.Activity
-                .Select(p => _mapper.Map<Activity, ActivityModel>(p))
-                .ToArrayAsync(cancellationToken:cancellationToken);
+            var result = await this._activityService
+                .GetAllActivity(trackEntities:false, cancellationToken: cancellationToken)
+                .Select(p=> _mapper.Map<Activity,ActivityModel>(p))
+                .ToArrayAsync(cancellationToken: cancellationToken);
             return result;
         }
     }

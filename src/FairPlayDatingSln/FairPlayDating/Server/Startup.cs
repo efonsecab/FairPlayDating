@@ -4,6 +4,7 @@ using FairPlayDating.DataAccess.Models;
 using FairPlayDating.Models.CustomHttpResponse;
 using FairPlayDating.Server.CustomProviders;
 using FairPlayDating.Server.Swagger.Filters;
+using FairPlayDating.Services;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -139,6 +140,8 @@ namespace FairPlayDating.Server
                     facebookGraphConfiguration, sp.GetRequiredService<CustomHttpClient>());
                 return facebookGraphService;
             });
+            services.AddTransient<ActivityService>();
+
             services.AddControllersWithViews();
             services.AddAutoMapper(configAction =>
             {

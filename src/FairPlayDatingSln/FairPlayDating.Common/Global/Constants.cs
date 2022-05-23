@@ -4,6 +4,10 @@ namespace FairPlayDating.Common.Global
 {
     public static class Constants
     {
+        public class EntityNames
+        {
+            public const string Activity = nameof(Activity);
+        }
         public class Names
         {
             public const string ApplicationName = "FairPlayDating";

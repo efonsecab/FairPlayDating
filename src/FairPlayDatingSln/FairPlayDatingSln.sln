@@ -21,6 +21,10 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FairPlayDating.MauiBlazor",
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "FairPlayDating.ClientServices", "FairPlayDating.ClientServices\FairPlayDating.ClientServices.csproj", "{4BA90B79-0C56-435B-A777-F22AAEFBEF79}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FairPlayDating.Services", "FairPlayDating.Services\FairPlayDating.Services.csproj", "{5C3FA778-5376-4D35-8F53-434710090A00}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FairPlayDating.Services.Generators", "FairPlayDating.Services.Generators\FairPlayDating.Services.Generators.csproj", "{152AA964-813E-4ACB-A557-2EFC3FB27F41}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -67,6 +71,14 @@ Global
 		{4BA90B79-0C56-435B-A777-F22AAEFBEF79}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{4BA90B79-0C56-435B-A777-F22AAEFBEF79}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{4BA90B79-0C56-435B-A777-F22AAEFBEF79}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5C3FA778-5376-4D35-8F53-434710090A00}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5C3FA778-5376-4D35-8F53-434710090A00}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5C3FA778-5376-4D35-8F53-434710090A00}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5C3FA778-5376-4D35-8F53-434710090A00}.Release|Any CPU.Build.0 = Release|Any CPU
+		{152AA964-813E-4ACB-A557-2EFC3FB27F41}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{152AA964-813E-4ACB-A557-2EFC3FB27F41}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{152AA964-813E-4ACB-A557-2EFC3FB27F41}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{152AA964-813E-4ACB-A557-2EFC3FB27F41}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
