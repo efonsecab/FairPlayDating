@@ -141,6 +141,8 @@ namespace FairPlayDating.Server
                 return facebookGraphService;
             });
             services.AddTransient<ActivityService>();
+            services.AddTransient<UserActivityService>();
+            services.AddTransient<FrequencyService>();
 
             services.AddControllersWithViews();
             services.AddAutoMapper(configAction =>

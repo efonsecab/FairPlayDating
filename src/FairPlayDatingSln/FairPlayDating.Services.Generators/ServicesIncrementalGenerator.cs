@@ -91,14 +91,18 @@ namespace FairPlayDating.Services.Generators
                             stringBuilder.AppendLine($"using {assemblyNameFirstPart}.DataAccess.Models;");
                             stringBuilder.AppendLine("using System.Linq;");
                             stringBuilder.AppendLine("using Microsoft.EntityFrameworkCore;");
+                            stringBuilder.AppendLine("using FairPlayDating.Common.Interfaces;");
                             stringBuilder.AppendLine($"namespace {assemblyNameFirstPart}.Services");
                             stringBuilder.AppendLine("{");
                             stringBuilder.AppendLine($"public partial class {serviceName}");
                             stringBuilder.AppendLine("{");
                             stringBuilder.AppendLine("private readonly FairPlayDatingDbContext _fairPlayDatingDbContext;");
-                            stringBuilder.AppendLine($"public {serviceName}(FairPlayDatingDbContext fairPlayDatingDbContext)");
+                            stringBuilder.AppendLine("private readonly ICurrentUserProvider _currentUserProvider;");
+                            stringBuilder.AppendLine($"public {serviceName}(FairPlayDatingDbContext fairPlayDatingDbContext," +
+                                $"ICurrentUserProvider currentUserProvider)");
                             stringBuilder.AppendLine("{");
                             stringBuilder.AppendLine("_fairPlayDatingDbContext = fairPlayDatingDbContext;");
+                            stringBuilder.AppendLine("_currentUserProvider = currentUserProvider;");
                             stringBuilder.AppendLine("}");
                             stringBuilder.AppendLine($"public async Task<{entityName}> Create{entityName}Async({entityName} entity, CancellationToken cancellationToken)");
                             stringBuilder.AppendLine("{");

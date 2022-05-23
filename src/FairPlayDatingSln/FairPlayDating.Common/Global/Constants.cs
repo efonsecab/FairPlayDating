@@ -7,6 +7,8 @@ namespace FairPlayDating.Common.Global
         public class EntityNames
         {
             public const string Activity = nameof(Activity);
+            public const string UserActivity = nameof(UserActivity);
+            public const string Frequency = nameof(Frequency);
         }
         public class Names
         {

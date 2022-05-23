@@ -5,19 +5,26 @@
         <h1>My Profile</h1>
     </div>
     <div class="myprofile-content">
-        @if (AllActivities != null)
+        @if (AllActivities != null && this.AllFrequencies != null && this.ExtendedUserActivities != null)
         {
-            <div class="dropdown">
-                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton1" data-bs-toggle="dropdown" aria-expanded="false">
-                    Select an Activity
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
-                    @foreach (var singleActivity in this.AllActivities)
-                    {
-                     <li><a class="dropdown-item">@singleActivity.Name</a></li>   
-                    }
-                </ul>
-            </div>
+            <h2>Activities</h2>
+            @foreach (var singleExtendedUserActivity in this.ExtendedUserActivities)
+            {
+                <div class="row">
+                    <div class="col">
+                        @singleExtendedUserActivity.ActivityName
+                    </div>
+                    <div class="col">
+                        <select value="@singleExtendedUserActivity.FrequencyId" class="form-select" 
+                        @onchange="( async (ChangeEventArgs e) => await OnExtendedActivityFrequencyChangedAsync(singleExtendedUserActivity, e) )">
+                            @foreach (var singleFrequency in this.AllFrequencies)
+                            {
+                                <option value="@singleFrequency.FrequencyId">@singleFrequency.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            }
         }
     </div>
 </div>

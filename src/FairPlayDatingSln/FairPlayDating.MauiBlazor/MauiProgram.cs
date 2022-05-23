@@ -64,6 +64,8 @@ namespace FairPlayDating.MauiBlazor
             services.AddTransient<HttpClientService>();
             services.AddTransient<FacebookClientService>();
             services.AddTransient<ActivityClientService>();
+            services.AddTransient<UserActivityClientService>();
+            services.AddTransient<FrequencyClientService>();
 
             return builder.Build();
         }
