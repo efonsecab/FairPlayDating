@@ -1,4 +1,5 @@
-﻿@inherits LayoutComponentBase
+﻿@using FairPlayDating.MauiBlazor.Features.LogOn
+@inherits LayoutComponentBase
 
 <div class="root-grid">
     <div class="root-grid-header">
@@ -22,7 +23,16 @@
     </div>
     <div class="footer-section">
         <div class="footer-icons-section">
-            Footer Icons Here
+            @if (UserState.UserContext?.IsLoggedOn == true)
+            {
+                <button type="button" class="btn"
+                    style="color:white;"
+                    data-bs-toggle="tooltip" data-bs-placement="top"
+                    title="My Profile"
+                    @onclick="OnMyProfileButtonClicked">
+                    <i class="bi bi-person-bounding-box"></i>
+                </button>
+            }
         </div>
     </div>
 </div>

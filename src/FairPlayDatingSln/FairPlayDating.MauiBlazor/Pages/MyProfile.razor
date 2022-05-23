@@ -1,0 +1,18 @@
+﻿@page "/myprofile"
+
+<div class="myprofile-root-grid">
+    <div class="myprofile-title">
+        <h1>My Profile</h1>
+    </div>
+    <div class="myprofile-content">
+        @if (AllActivities != null)
+        {
+            <select class="form-control">
+                @foreach (var singleActivity in this.AllActivities)
+                {
+                    <option value="@singleActivity.ActivityId">@singleActivity.Name</option>
+                }
+            </select>
+        }
+    </div>
+</div>

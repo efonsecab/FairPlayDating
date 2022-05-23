@@ -11,6 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\FairPlayDating.ClientServices.Generators\FairPlayDating.ClientServices.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
     <ProjectReference Include="..\FairPlayDating.Common\FairPlayDating.Common.csproj" />
     <ProjectReference Include="..\FairPlayDating.Models\FairPlayDating.Models.csproj" />
   </ItemGroup>

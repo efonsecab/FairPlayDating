@@ -141,5 +141,10 @@ namespace FairPlayDating.MauiBlazor.Shared
                 //SignInButton.Visibility = Visibility.Visible;
             }
         }
+
+        private void OnMyProfileButtonClicked()
+        {
+            this.NavigationManager.NavigateTo("/MyProfile");
+        }
     }
 }
