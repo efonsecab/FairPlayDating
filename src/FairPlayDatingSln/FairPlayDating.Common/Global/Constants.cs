@@ -14,6 +14,8 @@ namespace FairPlayDating.Common.Global
             public const string EyesColor = nameof(EyesColor);
             public const string Gender = nameof(Gender);
             public const string DateObjective = nameof(DateObjective);
+            public const string Religion = nameof(Religion);
+            public const string KidStatus = nameof(KidStatus);
         }
         public class Names
         {

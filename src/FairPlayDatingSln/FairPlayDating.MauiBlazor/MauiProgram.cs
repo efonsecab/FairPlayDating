@@ -71,6 +71,8 @@ namespace FairPlayDating.MauiBlazor
             services.AddTransient<EyesColorClientService>();
             services.AddTransient<GenderClientService>();
             services.AddTransient<DateObjectiveClientService>();
+            services.AddTransient<ReligionClientService>();
+            services.AddTransient<KidStatusClientService>();
 
             return builder.Build();
         }

@@ -84,6 +84,57 @@
                 </div>
             </div>
                 }
+                @if (this.AllReligions != null)
+                {
+                    <div class="religion-section">
+                        <div class="religion-section-title">
+                            <h2>Religion</h2>
+                        </div>
+                        <div class="religion-section-content">
+                            <InputSelect class="form-select" @bind-Value="MyUserProfileModel.ReligionId">
+                                <option value="">Please select your Religion</option>
+                                @foreach (var singleReligion in this.AllReligions)
+                                {
+                            <option value="@singleReligion.ReligionId">@singleReligion.Name</option>
+                                }
+                    </InputSelect>
+                </div>
+            </div>
+                }
+                @if (this.AllKidStatus != null)
+                {
+                    <div class="kidstatus-section">
+                        <div class="kidstatus-section-title">
+                            <h2>Kid Status</h2>
+                        </div>
+                        <div class="kidstatus-section-content">
+                            <InputSelect class="form-select" @bind-Value="MyUserProfileModel.KidStatusId">
+                                <option value="">Please select your Kids Status</option>
+                                @foreach (var singleKidStatus in this.AllKidStatus)
+                                {
+                            <option value="@singleKidStatus.KidStatusId">@singleKidStatus.Name</option>
+                                }
+                    </InputSelect>
+                </div>
+            </div>
+                }
+                @if (this.AllKidStatus != null)
+                {
+                    <div class="preferredkidstatus-section">
+                        <div class="preferredkidstatus-section-title">
+                            <h2>Preferred Kid Status</h2>
+                        </div>
+                        <div class="preferredkidstatus-section-content">
+                            <InputSelect class="form-select" @bind-Value="MyUserProfileModel.PreferredKidStatusId">
+                                <option value="">Please select your Preferred Kids Status</option>
+                                @foreach (var singleKidStatus in this.AllKidStatus)
+                                {
+                            <option value="@singleKidStatus.KidStatusId">@singleKidStatus.Name</option>
+                                }
+                    </InputSelect>
+                </div>
+            </div>
+                }
             </div>
             <div class="myuserprofile-footer">
                 <div class="myuserprofile-footer-content">
