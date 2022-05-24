@@ -33,6 +33,23 @@
                 </div>
             </div>
                 }
+                @if (this.AllEyesColors != null)
+                {
+                    <div class="eyescolor-section">
+                        <div class="eyescolor-section-title">
+                            <h2>Eyes Color</h2>
+                        </div>
+                        <div class="eyescolor-section-content">
+                            <InputSelect class="form-select" @bind-Value="MyUserProfileModel.EyesColorId">
+                                <option value="">Please select your Eyes Color</option>
+                                @foreach (var singleEyesColor in this.AllEyesColors)
+                                {
+                            <option value="@singleEyesColor.EyesColorId">@singleEyesColor.Name</option>
+                                }
+                    </InputSelect>
+                </div>
+            </div>
+                }
             </div>
             <div class="myuserprofile-footer">
                 <div class="myuserprofile-footer-content">
