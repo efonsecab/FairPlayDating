@@ -12,6 +12,7 @@ namespace FairPlayDating.Common.Global
             public const string UserProfile = nameof(UserProfile);
             public const string HairColor = nameof(HairColor);
             public const string EyesColor = nameof(EyesColor);
+            public const string Gender = nameof(Gender);
         }
         public class Names
         {

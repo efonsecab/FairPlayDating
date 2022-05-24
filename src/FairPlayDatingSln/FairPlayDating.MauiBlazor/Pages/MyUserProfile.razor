@@ -50,6 +50,23 @@
                 </div>
             </div>
                 }
+                @if (this.AllGenders != null)
+                {
+                    <div class="gender-section">
+                        <div class="gender-section-title">
+                            <h2>Biological Sex/Gender</h2>
+                        </div>
+                        <div class="gender-section-content">
+                            <InputSelect class="form-select" @bind-Value="MyUserProfileModel.BiologicalGenderId">
+                                <option value="">Please select your Biological Sex/Gender</option>
+                                @foreach (var singleGender in this.AllGenders)
+                                {
+                            <option value="@singleGender.GenderId">@singleGender.Name</option>
+                                }
+                    </InputSelect>
+                </div>
+            </div>
+                }
             </div>
             <div class="myuserprofile-footer">
                 <div class="myuserprofile-footer-content">
