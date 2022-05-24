@@ -150,6 +150,7 @@ namespace FairPlayDating.Server
             services.AddTransient<DateObjectiveService>();
             services.AddTransient<ReligionService>();
             services.AddTransient<KidStatusService>();
+            services.AddTransient<TattooStatusService>();
 
             services.AddControllersWithViews();
             services.AddAutoMapper(configAction =>

@@ -1,5 +1,5 @@
 ﻿{
-   "CodeGenerationMode": 0,
+   "CodeGenerationMode": 2,
    "ContextClassName": "FairPlayDatingDbContext",
    "ContextNamespace": null,
    "DefaultDacpacSchema": null,
@@ -62,6 +62,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[TattooStatus]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[UserActivity]",
          "ObjectType": 0
       },
@@ -98,15 +102,18 @@
          "ObjectType": 0
       }
    ],
-   "UiHint": "C:\\Projects\\PTI\\GitHub\\FairPlayDating\\src\\FairPlayDatingSln\\FairPlayDating.Database\\FairPlayDating.Database.sqlproj",
+   "UiHint": "FairPlayDating.Database\\FairPlayDating.Database.sqlproj",
    "UseBoolPropertiesWithoutDefaultSql": false,
    "UseDatabaseNames": false,
    "UseDbContextSplitting": false,
    "UseFluentApiOnly": false,
    "UseHandleBars": false,
+   "UseHierarchyId": false,
    "UseInflector": false,
    "UseLegacyPluralizer": false,
+   "UseManyToManyEntity": false,
    "UseNoConstructor": false,
+   "UseNoDefaultConstructor": false,
    "UseNoNavigations": false,
    "UseNoObjectFilter": false,
    "UseNodaTime": false,

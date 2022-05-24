@@ -16,6 +16,7 @@ namespace FairPlayDating.Common.Global
             public const string DateObjective = nameof(DateObjective);
             public const string Religion = nameof(Religion);
             public const string KidStatus = nameof(KidStatus);
+            public const string TattooStatus = nameof(TattooStatus);
         }
         public class Names
         {

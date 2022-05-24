@@ -289,3 +289,31 @@ BEGIN
 END
 SET IDENTITY_INSERT [dbo].[EyesColor] OFF
 --END OF EYE COLOR
+--BEGIN OF TATOO STATUS values from KidStatus.Name
+SET IDENTITY_INSERT [dbo].[TattooStatus] ON
+DECLARE @TattooStatusNAME NVARCHAR(50) = 'Don''t have & Don''t want'
+DECLARE @TattooStatusID SMALLINT = 1
+IF NOT EXISTS (SELECT * FROM [dbo].[TattooStatus] t WHERE [T].[Name] = @TattooStatusNAME)
+BEGIN
+	INSERT INTO [dbo].[TattooStatus]([TattooStatusId],[Name]) VALUES(@TattooStatusID, @TattooStatusNAME)
+END
+SET @TattooStatusNAME = 'Don''t have & Want'
+SET @TattooStatusID = 2
+IF NOT EXISTS (SELECT * FROM [dbo].[TattooStatus] t WHERE [T].[Name] = @TattooStatusNAME)
+BEGIN
+	INSERT INTO [dbo].[TattooStatus]([TattooStatusId],[Name]) VALUES(@TattooStatusID, @TattooStatusNAME)
+END
+SET @TattooStatusNAME = 'Have & Don''t want more'
+SET @TattooStatusID = 3
+IF NOT EXISTS (SELECT * FROM [dbo].[TattooStatus] t WHERE [T].[Name] = @TattooStatusNAME)
+BEGIN
+	INSERT INTO [dbo].[TattooStatus]([TattooStatusId],[Name]) VALUES(@TattooStatusID, @TattooStatusNAME)
+END
+SET @TattooStatusNAME = 'Have & Want more'
+SET @TattooStatusID = 4
+IF NOT EXISTS (SELECT * FROM [dbo].[TattooStatus] t WHERE [T].[Name] = @TattooStatusNAME)
+BEGIN
+	INSERT INTO [dbo].[TattooStatus]([TattooStatusId],[Name]) VALUES(@TattooStatusID, @TattooStatusNAME)
+END
+SET IDENTITY_INSERT [dbo].[TattooStatus] OFF
+--END OF TATOO STATUS

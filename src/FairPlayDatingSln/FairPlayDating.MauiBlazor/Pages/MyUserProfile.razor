@@ -135,6 +135,40 @@
                 </div>
             </div>
                 }
+                @if (this.AllTatooStatus != null)
+                {
+                    <div class="tatoostatus-section">
+                        <div class="tatoostatus-section-title">
+                            <h2>Tatoo Status</h2>
+                        </div>
+                        <div class="tatoostatus-section-content">
+                            <InputSelect class="form-select" @bind-Value="MyUserProfileModel.TattooStatusId">
+                                <option value="">Please select your Tatoo Status</option>
+                                @foreach (var singleTatooStatus in this.AllTatooStatus)
+                                {
+                            <option value="@singleTatooStatus.TattooStatusId">@singleTatooStatus.Name</option>
+                                }
+                    </InputSelect>
+                </div>
+            </div>
+                }
+                @if (this.AllTatooStatus != null)
+                {
+                    <div class="preferredtatoostatus-section">
+                        <div class="preferredtatoostatus-section-title">
+                            <h2>PreferredTatoo Status</h2>
+                        </div>
+                        <div class="preferredtatoostatus-section-content">
+                            <InputSelect class="form-select" @bind-Value="MyUserProfileModel.PreferredTattooStatusId">
+                                <option value="">Please select your Preferred Tatoo Status</option>
+                                @foreach (var singleTatooStatus in this.AllTatooStatus)
+                                {
+                            <option value="@singleTatooStatus.TattooStatusId">@singleTatooStatus.Name</option>
+                                }
+                    </InputSelect>
+                </div>
+            </div>
+                }
             </div>
             <div class="myuserprofile-footer">
                 <div class="myuserprofile-footer-content">

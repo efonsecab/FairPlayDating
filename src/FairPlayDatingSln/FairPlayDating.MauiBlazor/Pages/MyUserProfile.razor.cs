@@ -6,6 +6,7 @@ using FairPlayDating.Models.Gender;
 using FairPlayDating.Models.HairColor;
 using FairPlayDating.Models.KidStatus;
 using FairPlayDating.Models.Religion;
+using FairPlayDating.Models.TattooStatus;
 using FairPlayDating.Models.UserProfile;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
@@ -28,6 +29,7 @@ namespace FairPlayDating.MauiBlazor.Pages
         public DateObjectiveModel[] AllDateObjectives { get; private set; }
         public ReligionModel[] AllReligions { get; private set; }
         public KidStatusModel[] AllKidStatus { get; private set; }
+        public TattooStatusModel[] AllTatooStatus { get; private set; }
         [Inject]
         private UserProfileClientService UserProfileClientService { get; set; }
         [Inject]
@@ -42,6 +44,8 @@ namespace FairPlayDating.MauiBlazor.Pages
         private ReligionClientService ReligionClientService { get; set; }
         [Inject]
         private KidStatusClientService KidStatusClientService { get; set; }
+        [Inject]
+        private TattooStatusClientService TattooStatusClientService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -59,6 +63,7 @@ namespace FairPlayDating.MauiBlazor.Pages
             this.AllDateObjectives = await this.DateObjectiveClientService.GetAllDateObjectiveAsync();
             this.AllReligions = await this.ReligionClientService.GetAllReligionAsync();
             this.AllKidStatus = await this.KidStatusClientService.GetAllKidStatusAsync();
+            this.AllTatooStatus = await this.TattooStatusClientService.GetAllTattooStatusAsync();
         }
 
         private async Task UpdateMyUserProfileAsync()

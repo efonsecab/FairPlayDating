@@ -23,5 +23,7 @@ namespace FairPlayDating.Models.UserProfile
         public long ProfileUserPhotoId { get; set; }
         public short KidStatusId { get; set; }
         public short PreferredKidStatusId { get; set; }
+        public short TattooStatusId { get; set; }
+        public short PreferredTattooStatusId { get; set; }
     }
 }
