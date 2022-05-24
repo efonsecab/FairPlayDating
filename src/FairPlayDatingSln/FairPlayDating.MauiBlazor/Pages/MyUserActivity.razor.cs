@@ -1,4 +1,5 @@
 ﻿using FairPlayDating.ClientServices;
+using FairPlayDating.Common.Global;
 using FairPlayDating.MauiBlazor.ExtendedModels;
 using FairPlayDating.Models.Activity;
 using FairPlayDating.Models.Frequency;
@@ -13,8 +14,9 @@ using System.Threading.Tasks;
 
 namespace FairPlayDating.MauiBlazor.Pages
 {
+    [Route(Constants.MauiBlazorAppRoutes.MyUserActivity)]
     [Authorize]
-    public partial class MyProfile
+    public partial class MyUserActivity
     {
         private ActivityModel[] AllActivities;
 

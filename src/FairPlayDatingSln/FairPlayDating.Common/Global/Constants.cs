@@ -9,6 +9,7 @@ namespace FairPlayDating.Common.Global
             public const string Activity = nameof(Activity);
             public const string UserActivity = nameof(UserActivity);
             public const string Frequency = nameof(Frequency);
+            public const string UserProfile = nameof(UserProfile);
         }
         public class Names
         {
@@ -43,6 +44,11 @@ namespace FairPlayDating.Common.Global
         {
             public const string MyPhotos = "/Users/MyPhotos";
             public const string MyAlbums = "/Users/MyAlbums";
+        }
+
+        public static class MauiBlazorAppRoutes
+        {
+            public const string MyUserActivity = "/MyUserActivity";
         }
 
         public static class ApiRoutes

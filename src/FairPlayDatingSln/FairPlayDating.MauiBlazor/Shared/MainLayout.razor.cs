@@ -1,4 +1,5 @@
-﻿using FairPlayDating.MauiBlazor.Features.LogOn;
+﻿using FairPlayDating.Common.Global;
+using FairPlayDating.MauiBlazor.Features.LogOn;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Identity.Client;
 using System;
@@ -144,7 +145,7 @@ namespace FairPlayDating.MauiBlazor.Shared
 
         private void OnMyProfileButtonClicked()
         {
-            this.NavigationManager.NavigateTo("/MyProfile");
+            this.NavigationManager.NavigateTo(Constants.MauiBlazorAppRoutes.MyUserActivity);
         }
     }
 }
