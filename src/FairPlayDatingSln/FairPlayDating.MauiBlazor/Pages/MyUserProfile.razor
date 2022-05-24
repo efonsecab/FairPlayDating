@@ -16,6 +16,23 @@
                         <InputTextArea class="form-control" @bind-Value="this.MyUserProfileModel.About" rows="5"></InputTextArea>
                     </div>
                 </div>
+                @if (this.AllHairColors != null)
+                {
+                    <div class="haircolor-section">
+                        <div class="haircolor-section-title">
+                            <h2>Hair Color</h2>
+                        </div>
+                        <div class="haircolor-section-content">
+                            <InputSelect class="form-select" @bind-Value="MyUserProfileModel.HairColorId">
+                                <option value="">Please select your Hair Color</option>
+                                @foreach (var singleHaircolor in this.AllHairColors)
+                                {
+                            <option value="@singleHaircolor.HairColorId">@singleHaircolor.Name</option>
+                                }
+                    </InputSelect>
+                </div>
+            </div>
+                }
             </div>
             <div class="myuserprofile-footer">
                 <div class="myuserprofile-footer-content">

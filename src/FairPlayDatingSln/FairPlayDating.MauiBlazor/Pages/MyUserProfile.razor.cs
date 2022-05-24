@@ -1,5 +1,6 @@
 ﻿using FairPlayDating.ClientServices;
 using FairPlayDating.Common.Global;
+using FairPlayDating.Models.HairColor;
 using FairPlayDating.Models.UserProfile;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
@@ -16,8 +17,11 @@ namespace FairPlayDating.MauiBlazor.Pages
     public partial class MyUserProfile
     {
         public UserProfileModel MyUserProfileModel { get; private set; }
+        public HairColorModel[] AllHairColors { get; private set; }
         [Inject]
         private UserProfileClientService UserProfileClientService { get; set; }
+        [Inject]
+        private HairColorClientService HairColorClientService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -29,6 +33,7 @@ namespace FairPlayDating.MauiBlazor.Pages
             {
                 this.MyUserProfileModel = new();
             }
+            this.AllHairColors = await this.HairColorClientService.GetAllHairColorAsync();
         }
 
         private async Task UpdateMyUserProfileAsync()

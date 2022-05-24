@@ -10,6 +10,7 @@ namespace FairPlayDating.Common.Global
             public const string UserActivity = nameof(UserActivity);
             public const string Frequency = nameof(Frequency);
             public const string UserProfile = nameof(UserProfile);
+            public const string HairColor = nameof(HairColor);
         }
         public class Names
         {
