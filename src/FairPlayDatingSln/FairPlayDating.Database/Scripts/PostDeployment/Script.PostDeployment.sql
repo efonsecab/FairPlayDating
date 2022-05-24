@@ -237,3 +237,55 @@ BEGIN
 END
 SET IDENTITY_INSERT [dbo].[HairColor] OFF
 --END OF HAIR COLOR
+--BEGIN OF EYE COLOR
+SET IDENTITY_INSERT [dbo].[EyesColor] ON
+DECLARE @EyesColorNAME NVARCHAR(50) = 'Black'
+DECLARE @EyesColorID SMALLINT = 1
+IF NOT EXISTS (SELECT * FROM [dbo].[EyesColor] e WHERE [E].[Name] = @EyesColorNAME)
+BEGIN
+	INSERT INTO [dbo].[EyesColor]([EyesColorId],[Name]) VALUES(@EyesColorID, @EyesColorNAME)
+END
+SET @EyesColorNAME = 'Brown'
+SET @EyesColorID = 2
+IF NOT EXISTS (SELECT * FROM [dbo].[EyesColor] e WHERE [E].[Name] = @EyesColorNAME)
+BEGIN
+	INSERT INTO [dbo].[EyesColor]([EyesColorId],[Name]) VALUES(@EyesColorID, @EyesColorNAME)
+END
+SET @EyesColorNAME = 'Blue'
+SET @EyesColorID = 3
+IF NOT EXISTS (SELECT * FROM [dbo].[EyesColor] e WHERE [E].[Name] = @EyesColorNAME)
+BEGIN
+	INSERT INTO [dbo].[EyesColor]([EyesColorId],[Name]) VALUES(@EyesColorID, @EyesColorNAME)
+END
+SET @EyesColorNAME = 'Green'
+SET @EyesColorID = 4
+IF NOT EXISTS (SELECT * FROM [dbo].[EyesColor] e WHERE [E].[Name] = @EyesColorNAME)
+BEGIN
+	INSERT INTO [dbo].[EyesColor]([EyesColorId],[Name]) VALUES(@EyesColorID, @EyesColorNAME)
+END
+SET @EyesColorNAME = 'Hazel'
+SET @EyesColorID = 5
+IF NOT EXISTS (SELECT * FROM [dbo].[EyesColor] e WHERE [E].[Name] = @EyesColorNAME)
+BEGIN
+	INSERT INTO [dbo].[EyesColor]([EyesColorId],[Name]) VALUES(@EyesColorID, @EyesColorNAME)
+END
+SET @EyesColorNAME = 'Gray'
+SET @EyesColorID = 6
+IF NOT EXISTS (SELECT * FROM [dbo].[EyesColor] e WHERE [E].[Name] = @EyesColorNAME)
+BEGIN
+	INSERT INTO [dbo].[EyesColor]([EyesColorId],[Name]) VALUES(@EyesColorID, @EyesColorNAME)
+END
+SET @EyesColorNAME = 'Amber'
+SET @EyesColorID = 7
+IF NOT EXISTS (SELECT * FROM [dbo].[EyesColor] e WHERE [E].[Name] = @EyesColorNAME)
+BEGIN
+	INSERT INTO [dbo].[EyesColor]([EyesColorId],[Name]) VALUES(@EyesColorID, @EyesColorNAME)
+END
+SET @EyesColorNAME = 'Other'
+SET @EyesColorID = 8
+IF NOT EXISTS (SELECT * FROM [dbo].[EyesColor] e WHERE [E].[Name] = @EyesColorNAME)
+BEGIN
+	INSERT INTO [dbo].[EyesColor]([EyesColorId],[Name]) VALUES(@EyesColorID, @EyesColorNAME)
+END
+SET IDENTITY_INSERT [dbo].[EyesColor] OFF
+--END OF EYE COLOR
