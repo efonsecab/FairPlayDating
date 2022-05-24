@@ -14,7 +14,7 @@ namespace FairPlayDating.Models.UserProfile
         public short? HairColorId { get; set; }
         public short? EyesColorId { get; set; }
         public short? BiologicalGenderId { get; set; }
-        public short CurrentDateObjectiveId { get; set; }
+        public short? CurrentDateObjectiveId { get; set; }
         public short ReligionId { get; set; }
         public double CurrentLatitude { get; set; }
         public double CurrentLongitude { get; set; }

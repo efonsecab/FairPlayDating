@@ -1,5 +1,6 @@
 ﻿using FairPlayDating.ClientServices;
 using FairPlayDating.Common.Global;
+using FairPlayDating.Models.DateObjective;
 using FairPlayDating.Models.EyesColor;
 using FairPlayDating.Models.Gender;
 using FairPlayDating.Models.HairColor;
@@ -22,6 +23,7 @@ namespace FairPlayDating.MauiBlazor.Pages
         public HairColorModel[] AllHairColors { get; private set; }
         public EyesColorModel[] AllEyesColors { get; private set; }
         public GenderModel[] AllGenders { get; private set; }
+        public DateObjectiveModel[] AllDateObjectives { get; private set; }
         [Inject]
         private UserProfileClientService UserProfileClientService { get; set; }
         [Inject]
@@ -30,6 +32,8 @@ namespace FairPlayDating.MauiBlazor.Pages
         private EyesColorClientService EyesColorClientService { get; set; }
         [Inject]
         private GenderClientService GetGenderClientService { get; set; }
+        [Inject]
+        private DateObjectiveClientService DateObjectiveClientService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -44,6 +48,7 @@ namespace FairPlayDating.MauiBlazor.Pages
             this.AllHairColors = await this.HairColorClientService.GetAllHairColorAsync();
             this.AllEyesColors = await this.EyesColorClientService.GetAllEyesColorAsync();
             this.AllGenders = await this.GetGenderClientService.GetAllGenderAsync();
+            this.AllDateObjectives = await this.DateObjectiveClientService.GetAllDateObjectiveAsync();
         }
 
         private async Task UpdateMyUserProfileAsync()

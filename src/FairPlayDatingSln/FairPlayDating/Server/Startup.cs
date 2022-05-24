@@ -147,6 +147,7 @@ namespace FairPlayDating.Server
             services.AddTransient<HairColorService>();
             services.AddTransient<EyesColorService>();
             services.AddTransient<GenderService>();
+            services.AddTransient<DateObjectiveService>();
 
             services.AddControllersWithViews();
             services.AddAutoMapper(configAction =>
