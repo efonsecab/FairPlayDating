@@ -145,7 +145,7 @@ namespace FairPlayDating.MauiBlazor.Shared
 
         private void OnMyProfileButtonClicked()
         {
-            this.NavigationManager.NavigateTo(Constants.MauiBlazorAppRoutes.MyUserActivity);
+            this.NavigationManager.NavigateTo(Constants.MauiBlazorAppRoutes.MyUserProfile);
         }
     }
 }

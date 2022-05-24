@@ -49,6 +49,7 @@ namespace FairPlayDating.Common.Global
         public static class MauiBlazorAppRoutes
         {
             public const string MyUserActivity = "/MyUserActivity";
+            public const string MyUserProfile = "/MyUserProfile";
         }
 
         public static class ApiRoutes

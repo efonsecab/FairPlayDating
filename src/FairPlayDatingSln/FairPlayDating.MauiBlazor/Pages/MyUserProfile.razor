@@ -1,0 +1,27 @@
+﻿@if (MyUserProfileModel != null)
+{
+    <EditForm Model="this.MyUserProfileModel" OnValidSubmit="UpdateMyUserProfileAsync">
+        <DataAnnotationsValidator></DataAnnotationsValidator>
+        <ValidationSummary></ValidationSummary>
+        <div class="myuserprofile-root-grid">
+            <div class="myuserprofile-title">
+                <h1>My User Profile</h1>
+            </div>
+            <div class="myuserprofile-content">
+                <div class="about-section">
+                    <div class="about-section-title">
+                        <h2>About</h2>
+                    </div>
+                    <div class="about-section-content">
+                        <InputTextArea class="form-control" @bind-Value="this.MyUserProfileModel.About" rows="5"></InputTextArea>
+                    </div>
+                </div>
+            </div>
+            <div class="myuserprofile-footer">
+                <div class="myuserprofile-footer-content">
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+            </div>
+        </div>
+    </EditForm>
+}

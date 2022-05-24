@@ -143,6 +143,7 @@ namespace FairPlayDating.Server
             services.AddTransient<ActivityService>();
             services.AddTransient<UserActivityService>();
             services.AddTransient<FrequencyService>();
+            services.AddTransient<UserProfileService>();
 
             services.AddControllersWithViews();
             services.AddAutoMapper(configAction =>
