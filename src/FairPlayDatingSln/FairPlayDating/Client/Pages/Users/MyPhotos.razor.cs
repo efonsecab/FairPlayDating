@@ -22,7 +22,7 @@ namespace FairPlayDating.Client.Pages.Users
 
         private async Task LoadData()
         {
-            this.PagePhotos = await this.FacebookClientService.GetMyPhotos(PageToken);
+            this.PagePhotos = await this.FacebookClientService.GetMyPhotosAsync(PageToken);
         }
 
         private async Task OnNextPageClick()

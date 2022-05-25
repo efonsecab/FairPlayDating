@@ -14,7 +14,7 @@ namespace FairPlayDating.ClientServices
         }
 
 
-        public async Task<GetMyPhotosResponse> GetMyPhotos(string pageToken = null)
+        public async Task<GetMyPhotosResponse?> GetMyPhotosAsync(string? pageToken = null)
         {
             string requestUrl = $"{Constants.ApiRoutes.GetMyPhotos}?pageToken={pageToken}";
             var authorizedHttpClinet = this.HttpClientService.CreateAuthorizedClient();
@@ -22,7 +22,7 @@ namespace FairPlayDating.ClientServices
             return result;
         }
 
-        public async Task<GetMyAlbumsResponse> GetMyAlbums(string pageToken = null)
+        public async Task<GetMyAlbumsResponse?> GetMyAlbumsAsync(string? pageToken = null)
         {
             string requestUrl = $"{Constants.ApiRoutes.GetMyAlbums}?pageToken={pageToken}";
             var authorizedHttpClinet = this.HttpClientService.CreateAuthorizedClient();

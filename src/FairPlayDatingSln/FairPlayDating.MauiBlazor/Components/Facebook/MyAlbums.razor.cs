@@ -19,7 +19,7 @@ namespace FairPlayDating.MauiBlazor.Components.Facebook
         {
             try
             {
-                this.MyAlbumsPage = await this.FacebookClientService.GetMyAlbums();
+                this.MyAlbumsPage = await this.FacebookClientService.GetMyAlbumsAsync();
             }
             catch (Exception ex)
             {
