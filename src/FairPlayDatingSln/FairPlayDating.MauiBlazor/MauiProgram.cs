@@ -1,4 +1,5 @@
-﻿using FairPlayDating.ClientServices;
+﻿using Blazored.Toast;
+using FairPlayDating.ClientServices;
 using FairPlayDating.Common.Global;
 using FairPlayDating.MauiBlazor.Authentication;
 using FairPlayDating.MauiBlazor.Data;
@@ -75,6 +76,7 @@ namespace FairPlayDating.MauiBlazor
             services.AddTransient<KidStatusClientService>();
             services.AddTransient<TattooStatusClientService>();
             services.AddTransient<MatchClientService>();
+            services.AddBlazoredToast();
 
             return builder.Build();
         }

@@ -68,6 +68,7 @@ namespace FairPlayDating.MauiBlazor.Pages
 
         private async Task UpdateMyUserProfileAsync()
         {
+            await Task.Yield();
             //await this.UserProfileClientService.UpdateMyUserProfileAsync(this.MyUserProfileModel);
         }
     }

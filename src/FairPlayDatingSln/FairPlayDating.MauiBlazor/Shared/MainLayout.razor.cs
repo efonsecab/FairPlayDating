@@ -1,4 +1,5 @@
-﻿using FairPlayDating.Common.Global;
+﻿using Blazored.Toast.Services;
+using FairPlayDating.Common.Global;
 using FairPlayDating.MauiBlazor.Features.LogOn;
 using Microsoft.AspNetCore.Components;
 using Microsoft.Identity.Client;
@@ -16,6 +17,8 @@ namespace FairPlayDating.MauiBlazor.Shared
         private B2CConstants B2CConstants { get; set; }
         [Inject]
         private NavigationManager NavigationManager { get; set; }
+        [Inject]
+        private IToastService ToastService { get; set; }
         public bool HasInternet { get; private set; }
 
         protected override async Task OnInitializedAsync()
@@ -70,6 +73,7 @@ namespace FairPlayDating.MauiBlazor.Shared
             }
             catch (MsalUiRequiredException ex)
             {
+                this.ToastService.ShowError(ex.Message);
                 authResult = await B2CConstants.PublicClientApp
                     .AcquireTokenInteractive(B2CConstants.ApiScopesArray)
 #if ANDROID

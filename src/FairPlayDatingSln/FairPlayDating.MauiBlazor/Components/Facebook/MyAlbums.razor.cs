@@ -1,4 +1,5 @@
-﻿using FairPlayDating.ClientServices;
+﻿using Blazored.Toast.Services;
+using FairPlayDating.ClientServices;
 using FairPlayDating.Models.Facebook.GetMyAlbums;
 using Microsoft.AspNetCore.Components;
 using System;
@@ -14,6 +15,8 @@ namespace FairPlayDating.MauiBlazor.Components.Facebook
         public GetMyAlbumsResponse MyAlbumsPage { get; private set; }
         [Inject]
         private FacebookClientService FacebookClientService { get; set; }
+        [Inject]
+        private IToastService ToastService { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
@@ -23,7 +26,7 @@ namespace FairPlayDating.MauiBlazor.Components.Facebook
             }
             catch (Exception ex)
             {
-                throw;
+                ToastService.ShowError(ex.Message);
             }
         }
 
