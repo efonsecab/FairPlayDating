@@ -151,6 +151,7 @@ namespace FairPlayDating.Server
             services.AddTransient<ReligionService>();
             services.AddTransient<KidStatusService>();
             services.AddTransient<TattooStatusService>();
+            services.AddTransient<MatchService>();
 
             services.AddControllersWithViews();
             services.AddAutoMapper(configAction =>
