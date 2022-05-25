@@ -1,4 +1,5 @@
-﻿@if (MyUserProfileModel != null)
+﻿<OverlaySpinner ShowSpinner=IsLoading></OverlaySpinner>
+@if (MyUserProfileModel != null)
 {
     <EditForm Model="this.MyUserProfileModel" OnValidSubmit="UpdateMyUserProfileAsync">
         <DataAnnotationsValidator></DataAnnotationsValidator>

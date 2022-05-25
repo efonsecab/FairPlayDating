@@ -1,0 +1,12 @@
+﻿@if (ShowSpinner)
+{
+    <div class="overlay"></div>
+    <div class="spanner">
+        <div class="loader"></div>
+        <p>Loading...</p>
+    </div>
+}
+@code {
+    [Parameter]
+    public bool ShowSpinner { get; set; }
+}

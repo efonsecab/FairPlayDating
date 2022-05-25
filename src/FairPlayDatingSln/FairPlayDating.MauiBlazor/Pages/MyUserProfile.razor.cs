@@ -46,9 +46,10 @@ namespace FairPlayDating.MauiBlazor.Pages
         private KidStatusClientService KidStatusClientService { get; set; }
         [Inject]
         private TattooStatusClientService TattooStatusClientService { get; set; }
-
+        private bool IsLoading { get; set; }
         protected override async Task OnInitializedAsync()
         {
+            IsLoading = true;
             try
             {
                 this.MyUserProfileModel = await this.UserProfileClientService.GetMyUserProfileAsync();
@@ -64,6 +65,7 @@ namespace FairPlayDating.MauiBlazor.Pages
             this.AllReligions = await this.ReligionClientService.GetAllReligionAsync();
             this.AllKidStatus = await this.KidStatusClientService.GetAllKidStatusAsync();
             this.AllTatooStatus = await this.TattooStatusClientService.GetAllTattooStatusAsync();
+            IsLoading = false;
         }
 
         private async Task UpdateMyUserProfileAsync()
