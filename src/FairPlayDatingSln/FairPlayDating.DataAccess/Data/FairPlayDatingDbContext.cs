@@ -151,7 +151,7 @@ namespace FairPlayDating.DataAccess.Data
                     .HasConstraintName("FK_UserProfile_BiologicalGenderId");
 
                 entity.HasOne(d => d.CurrentDateObjective)
-                    .WithMany(p => p.UserProfileCurrentDateObjective)
+                    .WithMany(p => p.UserProfile)
                     .HasForeignKey(d => d.CurrentDateObjectiveId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UserProfile_CurrentDateObjectiveId");
@@ -173,12 +173,6 @@ namespace FairPlayDating.DataAccess.Data
                     .HasForeignKey(d => d.KidStatusId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UserProfile_KidStatus");
-
-                entity.HasOne(d => d.PreferredCurrentDateObjective)
-                    .WithMany(p => p.UserProfilePreferredCurrentDateObjective)
-                    .HasForeignKey(d => d.PreferredCurrentDateObjectiveId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UserProfile_PreferredCurrentDateObjectiveId");
 
                 entity.HasOne(d => d.PreferredEyesColor)
                     .WithMany(p => p.UserProfilePreferredEyesColor)

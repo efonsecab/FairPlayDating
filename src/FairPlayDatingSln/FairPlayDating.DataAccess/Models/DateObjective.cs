@@ -12,8 +12,7 @@ namespace FairPlayDating.DataAccess.Models
     {
         public DateObjective()
         {
-            UserProfileCurrentDateObjective = new HashSet<UserProfile>();
-            UserProfilePreferredCurrentDateObjective = new HashSet<UserProfile>();
+            UserProfile = new HashSet<UserProfile>();
         }
 
         [Key]
@@ -24,8 +23,6 @@ namespace FairPlayDating.DataAccess.Models
         public string Name { get; set; }
 
         [InverseProperty("CurrentDateObjective")]
-        public virtual ICollection<UserProfile> UserProfileCurrentDateObjective { get; set; }
-        [InverseProperty("PreferredCurrentDateObjective")]
-        public virtual ICollection<UserProfile> UserProfilePreferredCurrentDateObjective { get; set; }
+        public virtual ICollection<UserProfile> UserProfile { get; set; }
     }
 }

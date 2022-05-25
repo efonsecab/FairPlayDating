@@ -22,7 +22,6 @@ namespace FairPlayDating.DataAccess.Models
         public short PreferredEyesColorId { get; set; }
         public short BiologicalGenderId { get; set; }
         public short CurrentDateObjectiveId { get; set; }
-        public short PreferredCurrentDateObjectiveId { get; set; }
         public short ReligionId { get; set; }
         public short PreferredReligionId { get; set; }
         public double CurrentLatitude { get; set; }
@@ -40,7 +39,7 @@ namespace FairPlayDating.DataAccess.Models
         [InverseProperty("UserProfile")]
         public virtual Gender BiologicalGender { get; set; }
         [ForeignKey("CurrentDateObjectiveId")]
-        [InverseProperty("UserProfileCurrentDateObjective")]
+        [InverseProperty("UserProfile")]
         public virtual DateObjective CurrentDateObjective { get; set; }
         [ForeignKey("EyesColorId")]
         [InverseProperty("UserProfileEyesColor")]
@@ -51,9 +50,6 @@ namespace FairPlayDating.DataAccess.Models
         [ForeignKey("KidStatusId")]
         [InverseProperty("UserProfileKidStatus")]
         public virtual KidStatus KidStatus { get; set; }
-        [ForeignKey("PreferredCurrentDateObjectiveId")]
-        [InverseProperty("UserProfilePreferredCurrentDateObjective")]
-        public virtual DateObjective PreferredCurrentDateObjective { get; set; }
         [ForeignKey("PreferredEyesColorId")]
         [InverseProperty("UserProfilePreferredEyesColor")]
         public virtual EyesColor PreferredEyesColor { get; set; }

@@ -25,8 +25,6 @@ namespace FairPlayDating.Models.UserProfile
         [Required]
         public short? CurrentDateObjectiveId { get; set; }
         [Required]
-        public short? PreferredCurrentDateObjectiveId { get; set; }
-        [Required]
         public short? ReligionId { get; set; }
         [Required]
         public short? PreferredReligionId { get; set; }
