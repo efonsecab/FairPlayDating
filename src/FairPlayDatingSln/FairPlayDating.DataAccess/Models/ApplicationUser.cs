@@ -14,15 +14,12 @@ namespace FairPlayDating.DataAccess.Models
         public ApplicationUser()
         {
             UserActivity = new HashSet<UserActivity>();
-            UserEyesColorPreference = new HashSet<UserEyesColorPreference>();
             UserFeedback = new HashSet<UserFeedback>();
-            UserHairColorPreference = new HashSet<UserHairColorPreference>();
             UserInvitation = new HashSet<UserInvitation>();
             UserMessageFromApplicationUser = new HashSet<UserMessage>();
             UserMessageToApplicationUser = new HashSet<UserMessage>();
             UserPhoto = new HashSet<UserPhoto>();
             UserProfile = new HashSet<UserProfile>();
-            UserReligionPreference = new HashSet<UserReligionPreference>();
         }
 
         [Key]
@@ -44,11 +41,7 @@ namespace FairPlayDating.DataAccess.Models
         [InverseProperty("ApplicationUser")]
         public virtual ICollection<UserActivity> UserActivity { get; set; }
         [InverseProperty("ApplicationUser")]
-        public virtual ICollection<UserEyesColorPreference> UserEyesColorPreference { get; set; }
-        [InverseProperty("ApplicationUser")]
         public virtual ICollection<UserFeedback> UserFeedback { get; set; }
-        [InverseProperty("ApplicationUser")]
-        public virtual ICollection<UserHairColorPreference> UserHairColorPreference { get; set; }
         [InverseProperty("InvitingApplicationUser")]
         public virtual ICollection<UserInvitation> UserInvitation { get; set; }
         [InverseProperty("FromApplicationUser")]
@@ -59,7 +52,5 @@ namespace FairPlayDating.DataAccess.Models
         public virtual ICollection<UserPhoto> UserPhoto { get; set; }
         [InverseProperty("ApplicationUser")]
         public virtual ICollection<UserProfile> UserProfile { get; set; }
-        [InverseProperty("ApplicationUser")]
-        public virtual ICollection<UserReligionPreference> UserReligionPreference { get; set; }
     }
 }

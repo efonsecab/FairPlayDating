@@ -17,10 +17,14 @@ namespace FairPlayDating.DataAccess.Models
         [StringLength(100)]
         public string About { get; set; }
         public short HairColorId { get; set; }
+        public short PreferredHairColorId { get; set; }
         public short EyesColorId { get; set; }
+        public short PreferredEyesColorId { get; set; }
         public short BiologicalGenderId { get; set; }
         public short CurrentDateObjectiveId { get; set; }
+        public short PreferredCurrentDateObjectiveId { get; set; }
         public short ReligionId { get; set; }
+        public short PreferredReligionId { get; set; }
         public double CurrentLatitude { get; set; }
         public double CurrentLongitude { get; set; }
         public long ProfileUserPhotoId { get; set; }
@@ -36,20 +40,32 @@ namespace FairPlayDating.DataAccess.Models
         [InverseProperty("UserProfile")]
         public virtual Gender BiologicalGender { get; set; }
         [ForeignKey("CurrentDateObjectiveId")]
-        [InverseProperty("UserProfile")]
+        [InverseProperty("UserProfileCurrentDateObjective")]
         public virtual DateObjective CurrentDateObjective { get; set; }
         [ForeignKey("EyesColorId")]
-        [InverseProperty("UserProfile")]
+        [InverseProperty("UserProfileEyesColor")]
         public virtual EyesColor EyesColor { get; set; }
         [ForeignKey("HairColorId")]
-        [InverseProperty("UserProfile")]
+        [InverseProperty("UserProfileHairColor")]
         public virtual HairColor HairColor { get; set; }
         [ForeignKey("KidStatusId")]
         [InverseProperty("UserProfileKidStatus")]
         public virtual KidStatus KidStatus { get; set; }
+        [ForeignKey("PreferredCurrentDateObjectiveId")]
+        [InverseProperty("UserProfilePreferredCurrentDateObjective")]
+        public virtual DateObjective PreferredCurrentDateObjective { get; set; }
+        [ForeignKey("PreferredEyesColorId")]
+        [InverseProperty("UserProfilePreferredEyesColor")]
+        public virtual EyesColor PreferredEyesColor { get; set; }
+        [ForeignKey("PreferredHairColorId")]
+        [InverseProperty("UserProfilePreferredHairColor")]
+        public virtual HairColor PreferredHairColor { get; set; }
         [ForeignKey("PreferredKidStatusId")]
         [InverseProperty("UserProfilePreferredKidStatus")]
         public virtual KidStatus PreferredKidStatus { get; set; }
+        [ForeignKey("PreferredReligionId")]
+        [InverseProperty("UserProfilePreferredReligion")]
+        public virtual Religion PreferredReligion { get; set; }
         [ForeignKey("PreferredTattooStatusId")]
         [InverseProperty("UserProfilePreferredTattooStatus")]
         public virtual TattooStatus PreferredTattooStatus { get; set; }
@@ -57,7 +73,7 @@ namespace FairPlayDating.DataAccess.Models
         [InverseProperty("UserProfile")]
         public virtual UserPhoto ProfileUserPhoto { get; set; }
         [ForeignKey("ReligionId")]
-        [InverseProperty("UserProfile")]
+        [InverseProperty("UserProfileReligion")]
         public virtual Religion Religion { get; set; }
         [ForeignKey("TattooStatusId")]
         [InverseProperty("UserProfileTattooStatus")]

@@ -70,15 +70,7 @@
          "ObjectType": 0
       },
       {
-         "Name": "[dbo].[UserEyesColorPreference]",
-         "ObjectType": 0
-      },
-      {
          "Name": "[dbo].[UserFeedback]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[UserHairColorPreference]",
          "ObjectType": 0
       },
       {
@@ -95,10 +87,6 @@
       },
       {
          "Name": "[dbo].[UserProfile]",
-         "ObjectType": 0
-      },
-      {
-         "Name": "[dbo].[UserReligionPreference]",
          "ObjectType": 0
       }
    ],

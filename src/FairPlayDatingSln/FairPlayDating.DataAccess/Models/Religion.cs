@@ -12,8 +12,8 @@ namespace FairPlayDating.DataAccess.Models
     {
         public Religion()
         {
-            UserProfile = new HashSet<UserProfile>();
-            UserReligionPreference = new HashSet<UserReligionPreference>();
+            UserProfilePreferredReligion = new HashSet<UserProfile>();
+            UserProfileReligion = new HashSet<UserProfile>();
         }
 
         [Key]
@@ -23,9 +23,9 @@ namespace FairPlayDating.DataAccess.Models
         [Unicode(false)]
         public string Name { get; set; }
 
+        [InverseProperty("PreferredReligion")]
+        public virtual ICollection<UserProfile> UserProfilePreferredReligion { get; set; }
         [InverseProperty("Religion")]
-        public virtual ICollection<UserProfile> UserProfile { get; set; }
-        [InverseProperty("Religion")]
-        public virtual ICollection<UserReligionPreference> UserReligionPreference { get; set; }
+        public virtual ICollection<UserProfile> UserProfileReligion { get; set; }
     }
 }

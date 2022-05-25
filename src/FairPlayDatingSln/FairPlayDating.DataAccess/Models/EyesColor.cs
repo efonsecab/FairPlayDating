@@ -12,8 +12,8 @@ namespace FairPlayDating.DataAccess.Models
     {
         public EyesColor()
         {
-            UserEyesColorPreference = new HashSet<UserEyesColorPreference>();
-            UserProfile = new HashSet<UserProfile>();
+            UserProfileEyesColor = new HashSet<UserProfile>();
+            UserProfilePreferredEyesColor = new HashSet<UserProfile>();
         }
 
         [Key]
@@ -23,8 +23,8 @@ namespace FairPlayDating.DataAccess.Models
         public string Name { get; set; }
 
         [InverseProperty("EyesColor")]
-        public virtual ICollection<UserEyesColorPreference> UserEyesColorPreference { get; set; }
-        [InverseProperty("EyesColor")]
-        public virtual ICollection<UserProfile> UserProfile { get; set; }
+        public virtual ICollection<UserProfile> UserProfileEyesColor { get; set; }
+        [InverseProperty("PreferredEyesColor")]
+        public virtual ICollection<UserProfile> UserProfilePreferredEyesColor { get; set; }
     }
 }

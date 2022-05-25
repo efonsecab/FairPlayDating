@@ -33,6 +33,23 @@
                 </div>
             </div>
                 }
+                @if (this.AllHairColors != null)
+                {
+                    <div class="preferredhaircolor-section">
+                        <div class="preferredhaircolor-section-title">
+                            <h2>Preferred Hair Color</h2>
+                        </div>
+                        <div class="preferredhaircolor-section-content">
+                            <InputSelect class="form-select" @bind-Value="MyUserProfileModel.PreferredHairColorId">
+                                <option value="">Please select your Preferrd Hair Color</option>
+                                @foreach (var singleHaircolor in this.AllHairColors)
+                                {
+                            <option value="@singleHaircolor.HairColorId">@singleHaircolor.Name</option>
+                                }
+                    </InputSelect>
+                </div>
+            </div>
+                }
                 @if (this.AllEyesColors != null)
                 {
                     <div class="eyescolor-section">
@@ -42,6 +59,23 @@
                         <div class="eyescolor-section-content">
                             <InputSelect class="form-select" @bind-Value="MyUserProfileModel.EyesColorId">
                                 <option value="">Please select your Eyes Color</option>
+                                @foreach (var singleEyesColor in this.AllEyesColors)
+                                {
+                            <option value="@singleEyesColor.EyesColorId">@singleEyesColor.Name</option>
+                                }
+                    </InputSelect>
+                </div>
+            </div>
+                }
+                @if (this.AllEyesColors != null)
+                {
+                    <div class="preferredeyescolor-section">
+                        <div class="preferredeyescolor-section-title">
+                            <h2>Preferred Eyes Color</h2>
+                        </div>
+                        <div class="preferredeyescolor-section-content">
+                            <InputSelect class="form-select" @bind-Value="MyUserProfileModel.PreferredEyesColorId">
+                                <option value="">Please select your Preferred Eyes Color</option>
                                 @foreach (var singleEyesColor in this.AllEyesColors)
                                 {
                             <option value="@singleEyesColor.EyesColorId">@singleEyesColor.Name</option>
@@ -101,6 +135,23 @@
                 </div>
             </div>
                 }
+                @if (this.AllReligions != null)
+                {
+                    <div class="preferredreligion-section">
+                        <div class="preferredreligion-section-title">
+                            <h2>Preferred Religion</h2>
+                        </div>
+                        <div class="preferredreligion-section-content">
+                            <InputSelect class="form-select" @bind-Value="MyUserProfileModel.PreferredReligionId">
+                                <option value="">Please select your Preferred Religion</option>
+                                @foreach (var singleReligion in this.AllReligions)
+                                {
+                            <option value="@singleReligion.ReligionId">@singleReligion.Name</option>
+                                }
+                    </InputSelect>
+                </div>
+            </div>
+                }                
                 @if (this.AllKidStatus != null)
                 {
                     <div class="kidstatus-section">

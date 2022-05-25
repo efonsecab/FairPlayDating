@@ -33,14 +33,11 @@ namespace FairPlayDating.DataAccess.Data
         public virtual DbSet<Religion> Religion { get; set; }
         public virtual DbSet<TattooStatus> TattooStatus { get; set; }
         public virtual DbSet<UserActivity> UserActivity { get; set; }
-        public virtual DbSet<UserEyesColorPreference> UserEyesColorPreference { get; set; }
         public virtual DbSet<UserFeedback> UserFeedback { get; set; }
-        public virtual DbSet<UserHairColorPreference> UserHairColorPreference { get; set; }
         public virtual DbSet<UserInvitation> UserInvitation { get; set; }
         public virtual DbSet<UserMessage> UserMessage { get; set; }
         public virtual DbSet<UserPhoto> UserPhoto { get; set; }
         public virtual DbSet<UserProfile> UserProfile { get; set; }
-        public virtual DbSet<UserReligionPreference> UserReligionPreference { get; set; }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
@@ -97,21 +94,6 @@ namespace FairPlayDating.DataAccess.Data
                     .HasConstraintName("FK_UserActivity_Frequency");
             });
 
-            modelBuilder.Entity<UserEyesColorPreference>(entity =>
-            {
-                entity.HasOne(d => d.ApplicationUser)
-                    .WithMany(p => p.UserEyesColorPreference)
-                    .HasForeignKey(d => d.ApplicationUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UserEyesColorPreference_ApplicationUser");
-
-                entity.HasOne(d => d.EyesColor)
-                    .WithMany(p => p.UserEyesColorPreference)
-                    .HasForeignKey(d => d.EyesColorId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UserEyesColorPreference_EyesColor");
-            });
-
             modelBuilder.Entity<UserFeedback>(entity =>
             {
                 entity.HasOne(d => d.ApplicationUser)
@@ -119,21 +101,6 @@ namespace FairPlayDating.DataAccess.Data
                     .HasForeignKey(d => d.ApplicationUserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UserFeedback_ApplicationUserId");
-            });
-
-            modelBuilder.Entity<UserHairColorPreference>(entity =>
-            {
-                entity.HasOne(d => d.ApplicationUser)
-                    .WithMany(p => p.UserHairColorPreference)
-                    .HasForeignKey(d => d.ApplicationUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UserHairColorPreference_ApplicationUser");
-
-                entity.HasOne(d => d.HairColor)
-                    .WithMany(p => p.UserHairColorPreference)
-                    .HasForeignKey(d => d.HairColorId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("FK_UserHairColorPreference_HairColor");
             });
 
             modelBuilder.Entity<UserInvitation>(entity =>
@@ -184,19 +151,19 @@ namespace FairPlayDating.DataAccess.Data
                     .HasConstraintName("FK_UserProfile_BiologicalGenderId");
 
                 entity.HasOne(d => d.CurrentDateObjective)
-                    .WithMany(p => p.UserProfile)
+                    .WithMany(p => p.UserProfileCurrentDateObjective)
                     .HasForeignKey(d => d.CurrentDateObjectiveId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UserProfile_CurrentDateObjectiveId");
 
                 entity.HasOne(d => d.EyesColor)
-                    .WithMany(p => p.UserProfile)
+                    .WithMany(p => p.UserProfileEyesColor)
                     .HasForeignKey(d => d.EyesColorId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UserProfile_EyesColor");
 
                 entity.HasOne(d => d.HairColor)
-                    .WithMany(p => p.UserProfile)
+                    .WithMany(p => p.UserProfileHairColor)
                     .HasForeignKey(d => d.HairColorId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UserProfile_HairColor");
@@ -207,11 +174,35 @@ namespace FairPlayDating.DataAccess.Data
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UserProfile_KidStatus");
 
+                entity.HasOne(d => d.PreferredCurrentDateObjective)
+                    .WithMany(p => p.UserProfilePreferredCurrentDateObjective)
+                    .HasForeignKey(d => d.PreferredCurrentDateObjectiveId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserProfile_PreferredCurrentDateObjectiveId");
+
+                entity.HasOne(d => d.PreferredEyesColor)
+                    .WithMany(p => p.UserProfilePreferredEyesColor)
+                    .HasForeignKey(d => d.PreferredEyesColorId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserProfile_PreferredEyesColor");
+
+                entity.HasOne(d => d.PreferredHairColor)
+                    .WithMany(p => p.UserProfilePreferredHairColor)
+                    .HasForeignKey(d => d.PreferredHairColorId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserProfile_PreferredHairColor");
+
                 entity.HasOne(d => d.PreferredKidStatus)
                     .WithMany(p => p.UserProfilePreferredKidStatus)
                     .HasForeignKey(d => d.PreferredKidStatusId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UserProfile_PreferredKidStatus");
+
+                entity.HasOne(d => d.PreferredReligion)
+                    .WithMany(p => p.UserProfilePreferredReligion)
+                    .HasForeignKey(d => d.PreferredReligionId)
+                    .OnDelete(DeleteBehavior.ClientSetNull)
+                    .HasConstraintName("FK_UserProfile_PreferredReligionId");
 
                 entity.HasOne(d => d.PreferredTattooStatus)
                     .WithMany(p => p.UserProfilePreferredTattooStatus)
@@ -226,7 +217,7 @@ namespace FairPlayDating.DataAccess.Data
                     .HasConstraintName("FK_UserProfile_UserPhoto");
 
                 entity.HasOne(d => d.Religion)
-                    .WithMany(p => p.UserProfile)
+                    .WithMany(p => p.UserProfileReligion)
                     .HasForeignKey(d => d.ReligionId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UserProfile_ReligionId");
@@ -236,21 +227,6 @@ namespace FairPlayDating.DataAccess.Data
                     .HasForeignKey(d => d.TattooStatusId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_UserProfile_TattooStatus");
-            });
-
-            modelBuilder.Entity<UserReligionPreference>(entity =>
-            {
-                entity.HasOne(d => d.ApplicationUser)
-                    .WithMany(p => p.UserReligionPreference)
-                    .HasForeignKey(d => d.ApplicationUserId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Fk_UserReligionPreference_ApplicationUserId");
-
-                entity.HasOne(d => d.Religion)
-                    .WithMany(p => p.UserReligionPreference)
-                    .HasForeignKey(d => d.ReligionId)
-                    .OnDelete(DeleteBehavior.ClientSetNull)
-                    .HasConstraintName("Fk_UserReligionPreference_ReligionId");
             });
 
             OnModelCreatingPartial(modelBuilder);

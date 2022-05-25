@@ -12,8 +12,8 @@ namespace FairPlayDating.DataAccess.Models
     {
         public HairColor()
         {
-            UserHairColorPreference = new HashSet<UserHairColorPreference>();
-            UserProfile = new HashSet<UserProfile>();
+            UserProfileHairColor = new HashSet<UserProfile>();
+            UserProfilePreferredHairColor = new HashSet<UserProfile>();
         }
 
         [Key]
@@ -23,8 +23,8 @@ namespace FairPlayDating.DataAccess.Models
         public string Name { get; set; }
 
         [InverseProperty("HairColor")]
-        public virtual ICollection<UserHairColorPreference> UserHairColorPreference { get; set; }
-        [InverseProperty("HairColor")]
-        public virtual ICollection<UserProfile> UserProfile { get; set; }
+        public virtual ICollection<UserProfile> UserProfileHairColor { get; set; }
+        [InverseProperty("PreferredHairColor")]
+        public virtual ICollection<UserProfile> UserProfilePreferredHairColor { get; set; }
     }
 }

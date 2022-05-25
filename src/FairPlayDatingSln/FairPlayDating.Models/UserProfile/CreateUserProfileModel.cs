@@ -9,21 +9,40 @@ namespace FairPlayDating.Models.UserProfile
 {
     public class CreateUserProfileModel
     {
-        public long ApplicationUserId { get; set; }
         [Required]
         [StringLength(100)]
-        public string About { get; set; }
-        public short HairColorId { get; set; }
-        public short EyesColorId { get; set; }
-        public short BiologicalGenderId { get; set; }
-        public short CurrentDateObjectiveId { get; set; }
-        public short ReligionId { get; set; }
-        public double CurrentLatitude { get; set; }
-        public double CurrentLongitude { get; set; }
-        public long ProfileUserPhotoId { get; set; }
-        public short KidStatusId { get; set; }
-        public short PreferredKidStatusId { get; set; }
-        public short TattooStatusId { get; set; }
-        public short PreferredTattooStatusId { get; set; }
+        public string? About { get; set; }
+        [Required]
+        public short? HairColorId { get; set; }
+        [Required]
+        public short? PreferredHairColorId { get; set; }
+        [Required]
+        public short? EyesColorId { get; set; }
+        [Required]
+        public short? PreferredEyesColorId { get; set; }
+        [Required]
+        public short? BiologicalGenderId { get; set; }
+        [Required]
+        public short? CurrentDateObjectiveId { get; set; }
+        [Required]
+        public short? PreferredCurrentDateObjectiveId { get; set; }
+        [Required]
+        public short? ReligionId { get; set; }
+        [Required]
+        public short? PreferredReligionId { get; set; }
+        [Required]
+        public double? CurrentLatitude { get; set; }
+        [Required]
+        public double? CurrentLongitude { get; set; }
+        [Required]
+        public long? ProfileUserPhotoId { get; set; }
+        [Required]
+        public short? KidStatusId { get; set; }
+        [Required]
+        public short? PreferredKidStatusId { get; set; }
+        [Required]
+        public short? TattooStatusId { get; set; }
+        [Required]
+        public short? PreferredTattooStatusId { get; set; }
     }
 }

@@ -63,4 +63,11 @@
     <Property Name="ParentElementType" Value="SqlTable" />
     <Property Name="NewName" Value="TattooStatusId" />
   </Operation>
+  <Operation Name="Rename Refactor" Key="2d9bd2fb-d792-42bc-a338-335faebdf0a8" ChangeDateTime="05/25/2022 00:06:26">
+    <Property Name="ElementName" Value="[dbo].[UserProfile].[PreferredCurrentDateObjectId]" />
+    <Property Name="ElementType" Value="SqlSimpleColumn" />
+    <Property Name="ParentElementName" Value="[dbo].[UserProfile]" />
+    <Property Name="ParentElementType" Value="SqlTable" />
+    <Property Name="NewName" Value="PreferredCurrentDateObjectiveId" />
+  </Operation>
 </Operations>
