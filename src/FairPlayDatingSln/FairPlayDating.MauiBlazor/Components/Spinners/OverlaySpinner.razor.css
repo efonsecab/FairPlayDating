@@ -1,4 +1,6 @@
-﻿
+﻿/*
+    Spinner implementation based on https://codepen.io/umng/pen/wZzbbQ
+*/
 .spanner {
     position: absolute;
     top: 50%;
