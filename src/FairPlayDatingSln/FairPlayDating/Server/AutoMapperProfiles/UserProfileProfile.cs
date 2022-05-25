@@ -9,6 +9,7 @@ namespace FairPlayDating.Server.AutoMapperProfiles
         public UserProfileProfile()
         {
             CreateMap<UserProfile, UserProfileModel>();
+            CreateMap<UserProfileModel, UserProfile>();
         }
     }
 }

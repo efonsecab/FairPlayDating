@@ -26,5 +26,13 @@ namespace FairPlayDating.Server.Controllers
                 .SingleOrDefaultAsync(cancellationToken: cancellationToken);
             return result;
         }
+
+        [HttpPut("[action]")]
+        public async Task<IActionResult> UpdateMyUserProfile(UserProfileModel userProfileModel, CancellationToken cancellationToken)
+        {
+            var mappedUserProfile = this.mapper.Map<UserProfileModel, UserProfile>(userProfileModel);
+            await this.UserProfileService.UpdateMyUserProfileAsync(mappedUserProfile, cancellationToken);
+            return Ok();
+        }
     }
 }

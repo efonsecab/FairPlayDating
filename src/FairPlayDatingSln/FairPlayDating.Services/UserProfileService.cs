@@ -21,5 +21,24 @@ namespace FairPlayDating.Services
                 .Where(p => p.ApplicationUser.AzureAdB2cobjectId.ToString() == userObjectId);
             return result;
         }
+
+        public async Task UpdateMyUserProfileAsync(UserProfile userProfile, 
+            CancellationToken cancellationToken)
+        {
+
+            var userObjectId = this._currentUserProvider.GetObjectId();
+            var applicationUser = await this._fairPlayDatingDbContext.ApplicationUser
+                .SingleAsync(p => p.AzureAdB2cobjectId.ToString() == userObjectId, cancellationToken: cancellationToken);
+            var existentUserProfile =
+                await this._fairPlayDatingDbContext.UserProfile.AsNoTracking()
+                .SingleOrDefaultAsync(p => p.UserProfileId == userProfile.UserProfileId &&
+                p.ApplicationUserId == applicationUser.ApplicationUserId, cancellationToken: cancellationToken);
+            if (existentUserProfile != null)
+            {
+                userProfile.UserProfileId = existentUserProfile.UserProfileId;
+            }
+            this._fairPlayDatingDbContext.UserProfile.Update(userProfile);
+            await this._fairPlayDatingDbContext.SaveChangesAsync(cancellationToken: cancellationToken);
+        }
     }
 }
