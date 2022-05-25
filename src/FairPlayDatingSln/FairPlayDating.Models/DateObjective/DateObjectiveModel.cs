@@ -8,7 +8,7 @@ namespace FairPlayDating.Models.DateObjective
 {
     public class DateObjectiveModel
     {
-        public short DateObjectiveId { get; set; }
-        public string Name { get; set; }
+        public short? DateObjectiveId { get; set; }
+        public string? Name { get; set; }
     }
 }

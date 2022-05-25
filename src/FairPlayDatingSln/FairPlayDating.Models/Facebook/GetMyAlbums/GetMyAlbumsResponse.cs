@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FairPlayDating.Models.Facebook.GetMyAlbums
 {
-
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
     public class GetMyAlbumsResponse
     {
         public Datum[] data { get; set; }
@@ -46,5 +46,5 @@ namespace FairPlayDating.Models.Facebook.GetMyAlbums
         public bool is_silhouette { get; set; }
         public string url { get; set; }
     }
-
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 }

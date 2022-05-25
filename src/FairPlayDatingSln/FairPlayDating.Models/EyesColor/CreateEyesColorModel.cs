@@ -9,9 +9,9 @@ namespace FairPlayDating.Models.EyesColor
 {
     public class CreateEyesColorModel
     {
-        public short EyesColorId { get; set; }
+        public short? EyesColorId { get; set; }
         [Required]
         [StringLength(50)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }

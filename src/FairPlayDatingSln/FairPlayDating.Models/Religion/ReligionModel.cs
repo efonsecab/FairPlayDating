@@ -8,7 +8,7 @@ namespace FairPlayDating.Models.Religion
 {
     public class ReligionModel
     {
-        public short ReligionId { get; set; }
-        public string Name { get; set; }
+        public short? ReligionId { get; set; }
+        public string? Name { get; set; }
     }
 }

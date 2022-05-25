@@ -8,7 +8,7 @@ namespace FairPlayDating.Models.HairColor
 {
     public class HairColorModel
     {
-        public short HairColorId { get; set; }
-        public string Name { get; set; }
+        public short? HairColorId { get; set; }
+        public string? Name { get; set; }
     }
 }

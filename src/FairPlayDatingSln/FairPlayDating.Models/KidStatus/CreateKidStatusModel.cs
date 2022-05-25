@@ -9,9 +9,9 @@ namespace FairPlayDating.Models.KidStatus
 {
     public class CreateKidStatusModel
     {
-        public short KidStatusId { get; set; }
+        public short? KidStatusId { get; set; }
         [Required]
         [StringLength(50)]
-        public string Name { get; set; }
+        public string? Name { get; set; }
     }
 }

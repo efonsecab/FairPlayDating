@@ -8,7 +8,7 @@ namespace FairPlayDating.Models.Gender
 {
     public class GenderModel
     {
-        public short GenderId { get; set; }
-        public string Name { get; set; }
+        public short? GenderId { get; set; }
+        public string? Name { get; set; }
     }
 }

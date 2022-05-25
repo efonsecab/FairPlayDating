@@ -8,7 +8,7 @@ namespace FairPlayDating.Models.Frequency
 {
     public class FrequencyModel
     {
-        public short FrequencyId { get; set; }
-        public string Name { get; set; }
+        public short? FrequencyId { get; set; }
+        public string? Name { get; set; }
     }
 }

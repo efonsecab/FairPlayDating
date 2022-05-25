@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace FairPlayDating.Models.Facebook.GetMyPhotos
 {
+#pragma warning disable CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 
     public class GetMyPhotosResponse
-    {
-        public Datum[] data { get; set; }
+    {        public Datum[] data { get; set; }
         public Paging paging { get; set; }
     }
 
@@ -41,4 +41,5 @@ namespace FairPlayDating.Models.Facebook.GetMyPhotos
         public string source { get; set; }
         public int width { get; set; }
     }
+#pragma warning restore CS8618 // Non-nullable field must contain a non-null value when exiting constructor. Consider declaring as nullable.
 }

@@ -8,7 +8,7 @@ namespace FairPlayDating.Models.TattooStatus
 {
     public class TattooStatusModel
     {
-        public short TattooStatusId { get; set; }
-        public string Name { get; set; }
+        public short? TattooStatusId { get; set; }
+        public string? Name { get; set; }
     }
 }
