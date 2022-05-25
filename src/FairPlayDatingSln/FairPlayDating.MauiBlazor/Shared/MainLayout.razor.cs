@@ -14,14 +14,14 @@ namespace FairPlayDating.MauiBlazor.Shared
     public partial class MainLayout
     {
         [Inject]
-        private B2CConstants B2CConstants { get; set; }
-        [Inject]
         private NavigationManager NavigationManager { get; set; }
         [Inject]
         private IToastService ToastService { get; set; }
+        [Inject]
+        private B2CConstants B2CConstants { get; set; }
         public bool HasInternet { get; private set; }
 
-        protected override async Task OnInitializedAsync()
+        protected override void OnInitialized()
         {
             Connectivity.ConnectivityChanged += Connectivity_ConnectivityChanged;
             switch (Connectivity.NetworkAccess)
@@ -33,123 +33,45 @@ namespace FairPlayDating.MauiBlazor.Shared
                     HasInternet = true;
                     break;
             }
-            if (this.HasInternet && !UserState.UserContext.IsLoggedOn)
-            {
-                await Login();
-            }
         }
 
-        private async void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
+        private void Connectivity_ConnectivityChanged(object sender, ConnectivityChangedEventArgs e)
         {
             switch (e.NetworkAccess)
             {
                 case NetworkAccess.Internet:
                     if (!UserState.UserContext.IsLoggedOn)
                     {
-                        await Login();
+                        ToastService.ShowInfo("Internet Connection Restored");
                         HasInternet = true;
                         StateHasChanged();
                     }
                     break;
                 default:
+                    ToastService.ShowWarning("No Internet Connection");
                     HasInternet = false;
                     break;
-            }
-        }
-
-        private async Task Login()
-        {
-            AuthenticationResult authResult = null;
-            IEnumerable<IAccount> accounts = await B2CConstants.PublicClientApp.GetAccountsAsync();
-            try
-            {
-                IAccount currentUserAccount = GetAccountByPolicy(accounts, B2CConstants.PolicySignUpSignIn);
-                authResult = await B2CConstants.PublicClientApp
-                    .AcquireTokenSilent(B2CConstants.ApiScopesArray, currentUserAccount)
-                    .ExecuteAsync();
-
-                DisplayBasicTokenInfo(authResult);
-                UpdateSignInState(true);
-            }
-            catch (MsalUiRequiredException ex)
-            {
-                this.ToastService.ShowError(ex.Message);
-                authResult = await B2CConstants.PublicClientApp
-                    .AcquireTokenInteractive(B2CConstants.ApiScopesArray)
-#if ANDROID
-                    .WithParentActivityOrWindow(Platform.CurrentActivity)
-#endif
-                    .WithAccount(GetAccountByPolicy(accounts, B2CConstants.PolicySignUpSignIn))
-                    .WithPrompt(Prompt.SelectAccount)
-                    .ExecuteAsync();
-                UserState.UserContext = new UserContext()
-                {
-                    AccessToken = authResult.AccessToken,
-                    IsLoggedOn = true,
-                    UserIdentifier = authResult.UniqueId,
-                    Idp_Access_Token = authResult.ClaimsPrincipal.Claims.Single(p => p.Type == "idp_access_token").Value
-                };
-                //NavigationManager.NavigateTo("/", true);
-                DisplayBasicTokenInfo(authResult);
-                UpdateSignInState(true);
-            }
-
-            catch (Exception ex)
-            {
-                string message = $"Users:{string.Join(",", accounts.Select(u => u.Username))}{Environment.NewLine}Error Acquiring Token:{Environment.NewLine}{ex}";
-                //await ToastifyService.DisplayErrorNotification(message);
-            }
-        }
-
-        private IAccount GetAccountByPolicy(IEnumerable<IAccount> accounts, string policy)
-        {
-            foreach (var account in accounts)
-            {
-                string userIdentifier = account.HomeAccountId.ObjectId.Split('.')[0];
-                if (userIdentifier.EndsWith(policy.ToLower())) return account;
-            }
-
-            return null;
-        }
-
-        private void DisplayBasicTokenInfo(AuthenticationResult authResult)
-        {
-            //TokenInfoText.Text = "";
-            //if (authResult != null)
-            //{
-            //    TokenInfoText.Text += $"Name: {authResult.Account.Username}" + Environment.NewLine;
-            //    TokenInfoText.Text += $"Token Expires: {authResult.ExpiresOn.ToLocalTime()}" + Environment.NewLine;
-            //    TokenInfoText.Text += $"Id Token: {authResult.IdToken}" + Environment.NewLine;
-            //    TokenInfoText.Text += $"Tenant Id: {authResult.TenantId}" + Environment.NewLine;
-            //}
-        }
-
-        private void UpdateSignInState(bool signedIn)
-        {
-            if (signedIn)
-            {
-                //CallApiButton.Visibility = Visibility.Visible;
-                //EditProfileButton.Visibility = Visibility.Visible;
-                //SignOutButton.Visibility = Visibility.Visible;
-
-                //SignInButton.Visibility = Visibility.Collapsed;
-            }
-            else
-            {
-                //ResultText.Text = "";
-                //TokenInfoText.Text = "";
-
-                //CallApiButton.Visibility = Visibility.Collapsed;
-                //EditProfileButton.Visibility = Visibility.Collapsed;
-                //SignOutButton.Visibility = Visibility.Collapsed;
-
-                //SignInButton.Visibility = Visibility.Visible;
             }
         }
 
         private void OnMyProfileButtonClicked()
         {
             this.NavigationManager.NavigateTo(Constants.MauiBlazorAppRoutes.MyUserProfile);
+        }
+
+        private async void OnLogoutButtonClicked()
+        {
+            UserState.UserContext = new UserContext();
+            var allAccounts = await B2CConstants.PublicClientApp.GetAccountsAsync();
+            foreach (var singleAccount in allAccounts)
+            {
+                await B2CConstants.PublicClientApp.RemoveAsync(singleAccount);
+            }
+        }
+
+        private void OnLoginSuccess()
+        {
+            StateHasChanged();
         }
     }
 }
