@@ -5,6 +5,8 @@ using FairPlayDating.Models.CustomHttpResponse;
 using FairPlayDating.Server.CustomProviders;
 using FairPlayDating.Server.Swagger.Filters;
 using FairPlayDating.Services;
+using FairPlayDating.Services.Microservices.FaceDetection;
+using FairPlayDating.Services.Microservices.FaceDetection.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -152,6 +154,12 @@ namespace FairPlayDating.Server
             services.AddTransient<KidStatusService>();
             services.AddTransient<TattooStatusService>();
             services.AddTransient<MatchService>();
+
+            FaceDetectionMicroserviceConfiguration faceDetectionMicroserviceConfiguration =
+                Configuration.GetSection(nameof(FaceDetectionMicroserviceConfiguration))
+                .Get<FaceDetectionMicroserviceConfiguration>();
+            services.AddSingleton(faceDetectionMicroserviceConfiguration);
+            services.AddTransient<FaceDetectionMicroservice>();
 
             services.AddControllersWithViews();
             services.AddAutoMapper(configAction =>

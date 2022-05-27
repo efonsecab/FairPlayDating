@@ -19,11 +19,16 @@
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
     </PackageReference>
+    <PackageReference Include="PTI.Microservices.Library.Core" Version="6.0.0-preview" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\FairPlayDating.DataAccess\FairPlayDating.DataAccess.csproj" />
     <ProjectReference Include="..\FairPlayDating.Services.Generators\FairPlayDating.Services.Generators.csproj" OutputItemType="Analyzer" ReferenceOutputAssembly="false" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Microservices\FaceDetection\Models\" />
   </ItemGroup>
 
 </Project>
