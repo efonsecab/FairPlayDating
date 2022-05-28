@@ -5,6 +5,8 @@ using FairPlayDating.Models.CustomHttpResponse;
 using FairPlayDating.Server.CustomProviders;
 using FairPlayDating.Server.Swagger.Filters;
 using FairPlayDating.Services;
+using FairPlayDating.Services.Microservices.ComputerVision;
+using FairPlayDating.Services.Microservices.ComputerVision.Configuration;
 using FairPlayDating.Services.Microservices.FaceDetection;
 using FairPlayDating.Services.Microservices.FaceDetection.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
@@ -47,7 +49,7 @@ namespace FairPlayDating.Server
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAdB2C"));
-            services.Configure<MicrosoftIdentityOptions>(JwtBearerDefaults.AuthenticationScheme, options => 
+            services.Configure<MicrosoftIdentityOptions>(JwtBearerDefaults.AuthenticationScheme, options =>
             {
                 options.Scope.Add("user_photos");
             });
@@ -128,7 +130,7 @@ namespace FairPlayDating.Server
 
             services.AddTransient<CustomHttpClientHandler>();
             services.AddTransient<CustomHttpClient>();
-            services.AddTransient<FacebookGraphService>( sp=> 
+            services.AddTransient<FacebookGraphService>(sp =>
             {
                 var httpContextAccesor = sp.GetRequiredService<IHttpContextAccessor>();
                 var claims = httpContextAccesor.HttpContext.User.Claims;
@@ -155,11 +157,8 @@ namespace FairPlayDating.Server
             services.AddTransient<TattooStatusService>();
             services.AddTransient<MatchService>();
 
-            FaceDetectionMicroserviceConfiguration faceDetectionMicroserviceConfiguration =
-                Configuration.GetSection(nameof(FaceDetectionMicroserviceConfiguration))
-                .Get<FaceDetectionMicroserviceConfiguration>();
-            services.AddSingleton(faceDetectionMicroserviceConfiguration);
-            services.AddTransient<FaceDetectionMicroservice>();
+            ConfigureFaceDetection(services);
+            ConfigureComputerVision(services);
 
             services.AddControllersWithViews();
             services.AddAutoMapper(configAction =>
@@ -199,6 +198,24 @@ namespace FairPlayDating.Server
                     c.OperationFilter<SecurityRequirementsOperationFilter>();
                 });
             }
+        }
+
+        private void ConfigureComputerVision(IServiceCollection services)
+        {
+            ComputerVisionMicroserviceConfiguration computerVisionMicroserviceConfiguration =
+                            Configuration.GetRequiredSection(nameof(ComputerVisionMicroserviceConfiguration))
+                            .Get<ComputerVisionMicroserviceConfiguration>();
+            services.AddSingleton(computerVisionMicroserviceConfiguration);
+            services.AddTransient<ComputerVisionMicroservice>();
+        }
+
+        private void ConfigureFaceDetection(IServiceCollection services)
+        {
+            FaceDetectionMicroserviceConfiguration faceDetectionMicroserviceConfiguration =
+                            Configuration.GetSection(nameof(FaceDetectionMicroserviceConfiguration))
+                            .Get<FaceDetectionMicroserviceConfiguration>();
+            services.AddSingleton(faceDetectionMicroserviceConfiguration);
+            services.AddTransient<FaceDetectionMicroservice>();
         }
 
         private FairPlayDatingDbContext CreateFairPlayDatingDbContext(IServiceCollection services)
