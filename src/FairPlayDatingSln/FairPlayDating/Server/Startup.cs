@@ -175,6 +175,7 @@ namespace FairPlayDating.Server
                 var azureAdB2CDomain = Configuration["AzureAdB2C:Domain"];
                 var azureAdB2CClientAppClientId = Configuration["AzureAdB2C:ClientAppClientId"];
                 var azureAdB2ClientAppDefaultScope = Configuration["AzureAdB2C:ClientAppDefaultScope"];
+                services.AddEndpointsApiExplorer();
                 services.AddSwaggerGen(c =>
                 {
                     c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "FairPlayDating API" });
