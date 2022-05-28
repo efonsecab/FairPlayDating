@@ -10,9 +10,11 @@ using FairPlayDating.Services.Microservices.ComputerVision;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using PTI.Microservices.Library.Services;
 using System;
 using System.IO;
+using System.Linq;
 using System.Threading;
 using System.Threading.Tasks;
 
@@ -62,6 +64,19 @@ namespace FairPlayDating.Server.Controllers
             }
             var resultEntity = await userPhotoService.UploadMyPhotoAsync(photoUri, cancellationToken: cancellationToken);
             var resultModel = this.mapper.Map<UserPhoto, UserPhotoModel>(resultEntity);
+            return resultModel;
+        }
+
+        [HttpGet("[action]")]
+        public async Task<UserPhotoModel[]> GetUserPhotosByUserIdAsync(long applicationUserId, 
+            CancellationToken cancellationToken)
+        {
+            var query = this.UserPhotoService.GetAllUserPhoto(
+                trackEntities: false, cancellationToken: cancellationToken)
+                .Where(p => p.ApplicationUserId == applicationUserId);
+            var resultModel = await query
+                .Select(p => mapper.Map<UserPhoto, UserPhotoModel>(p))
+                .ToArrayAsync(cancellationToken: cancellationToken);
             return resultModel;
         }
     }
