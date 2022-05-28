@@ -1,10 +1,13 @@
 ﻿using FairPlayDating.Services.Microservices.ComputerVision.Configuration;
+using FairPlayDating.Services.Microservices.ComputerVision.Models;
 using PTI.Microservices.Library.Interceptors;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web;
 
 namespace FairPlayDating.Services.Microservices.ComputerVision
 {
@@ -21,17 +24,16 @@ namespace FairPlayDating.Services.Microservices.ComputerVision
             this.CustomHttpClient = customHttpClient;
         }
 
-        public async Task<string> AnalyzeFromImageUrlAsync(Uri imageUrl, CancellationToken cancellationToken)
+        public async Task<AnalyzeImageResponse?> AnalyzeFromImageUrlAsync(Uri imageUrl, CancellationToken cancellationToken)
         {
-            var imageBytes = await new HttpClient().GetByteArrayAsync(imageUrl);
-            MemoryStream imageStream = new MemoryStream(imageBytes);
             var requestUrl = $"{this.ComputerVisionMicroserviceConfiguration.BaseUrl}" +
-                $"/AnalyzeFromImageUrl/AnalyzeFromImageUrl";
-            string contentType = "image/jpeg";
-            var response = await this.CustomHttpClient.PostImageAsync(requestUrl, imageStream, contentType, cancellationToken);
+                $"/ComputerVision/AnalyzeFromImageUrl" +
+                $"?imageUrl={HttpUtility.UrlEncode(imageUrl.ToString())}";
+            var response = await this.CustomHttpClient.PostAsync(requestUrl, null, 
+                cancellationToken: cancellationToken);
             response.EnsureSuccessStatusCode();
-            var jsonString = await response.Content.ReadAsStringAsync();
-            return jsonString;
+            var result = await response.Content.ReadFromJsonAsync<AnalyzeImageResponse>();
+            return result;
         }
     }
 }

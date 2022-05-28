@@ -1,4 +1,5 @@
 ﻿using FairPlayDating.Common.CustomAttributes;
+using FairPlayDating.Common.CustomExceptions;
 using FairPlayDating.Common.Global;
 using FairPlayDating.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
@@ -20,7 +21,7 @@ namespace FairPlayDating.Services
                 .SingleOrDefaultAsync(p => p.AzureAdB2cobjectId.ToString() == userObjectId, cancellationToken);
             if (userEntity is null)
             {
-                throw new Exception("User not found");
+                throw new CustomValidationException("User not found");
             }
             UserPhoto userPhoto = new UserPhoto()
             {

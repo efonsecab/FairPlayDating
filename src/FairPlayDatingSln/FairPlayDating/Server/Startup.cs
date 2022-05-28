@@ -1,3 +1,4 @@
+using FairPlayDating.Common.CustomExceptions;
 using FairPlayDating.Common.Interfaces;
 using FairPlayDating.DataAccess.Data;
 using FairPlayDating.DataAccess.Models;
@@ -322,7 +323,9 @@ namespace FairPlayDating.Server
                 });
             });
 
-            //app.UseHttpsRedirection();
+            HandleExceptions(app);
+            
+            app.UseHttpsRedirection();
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
 
@@ -344,5 +347,63 @@ namespace FairPlayDating.Server
             var currentUserProvider = serviceProvider.GetService<ICurrentUserProvider>();
             return ConfigureFairPlayDatingDataContext(currentUserProvider);
         }
+
+        private async Task<long?> LogException(HttpContext context, Exception error, long? errorId)
+        {
+            try
+            {
+                FairPlayDatingDbContext fairPlayDatingDbContext =
+                this.CreateFairPlayDatingDbContext(context.RequestServices);
+                ErrorLog errorLog = new()
+                {
+                    FullException = error.ToString(),
+                    StackTrace = error.StackTrace,
+                    Message = error.Message
+                };
+                await fairPlayDatingDbContext.ErrorLog.AddAsync(errorLog);
+                await fairPlayDatingDbContext.SaveChangesAsync();
+                errorId = errorLog.ErrorLogId;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            ProblemHttpResponse problemHttpResponse = new();
+            if (error is CustomValidationException)
+            {
+                problemHttpResponse.Detail = error.Message;
+            }
+            else
+            {
+                string userVisibleError = "An error ocurred.";
+                if (errorId.HasValue)
+                {
+                    userVisibleError += $" Error code: {errorId}";
+                }
+                problemHttpResponse.Detail = userVisibleError;
+            }
+            problemHttpResponse.Status = (int)System.Net.HttpStatusCode.BadRequest;
+            await context.Response.WriteAsJsonAsync<ProblemHttpResponse>(problemHttpResponse);
+            return errorId;
+        }
+
+        private void HandleExceptions(IApplicationBuilder app)
+        {
+            app.UseExceptionHandler(cfg =>
+            {
+                cfg.Run(async context =>
+                {
+                    var exceptionHandlerPathFeature =
+                    context.Features.Get<IExceptionHandlerPathFeature>();
+                    var error = exceptionHandlerPathFeature.Error;
+                    long? errorId = default;
+                    if (error != null)
+                    {
+                        errorId = await LogException(context, error, errorId);
+                    }
+                });
+            });
+        }
+
     }
 }

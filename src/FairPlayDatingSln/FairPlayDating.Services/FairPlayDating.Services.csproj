@@ -29,7 +29,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Microservices\ComputerVision\Models\" />
     <Folder Include="Microservices\FaceDetection\Models\" />
   </ItemGroup>
 

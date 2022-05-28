@@ -1,4 +1,5 @@
-﻿using FairPlayDating.Common.Interfaces;
+﻿using FairPlayDating.Common.CustomExceptions;
+using FairPlayDating.Common.Interfaces;
 using FairPlayDating.DataAccess.Data;
 using FairPlayDating.DataAccess.Models;
 using Microsoft.EntityFrameworkCore;
@@ -30,7 +31,7 @@ namespace FairPlayDating.Services
                 .SingleOrDefaultAsync(p => p.ApplicationUser.AzureAdB2cobjectId.ToString() == userObjectId,
                 cancellationToken: cancellationToken);
             if (myUserProfile is null)
-                throw new Exception($"Unable to find user profile");
+                throw new CustomValidationException($"Unable to find user profile");
             var result = this._fairPlayDatingDbContext.UserProfile
                 .Where(p => p.ApplicationUserId != myUserProfile.ApplicationUserId &&
                 (
