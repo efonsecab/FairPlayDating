@@ -5,6 +5,7 @@ using FairPlayDating.Models.CustomHttpResponse;
 using FairPlayDating.Server.CustomProviders;
 using FairPlayDating.Server.Swagger.Filters;
 using FairPlayDating.Services;
+using FairPlayDating.Services.Configuration;
 using FairPlayDating.Services.Microservices.ComputerVision;
 using FairPlayDating.Services.Microservices.ComputerVision.Configuration;
 using FairPlayDating.Services.Microservices.FaceDetection;
@@ -156,9 +157,13 @@ namespace FairPlayDating.Server
             services.AddTransient<KidStatusService>();
             services.AddTransient<TattooStatusService>();
             services.AddTransient<MatchService>();
+            services.AddTransient<UserPhotoService>();
 
             ConfigureFaceDetection(services);
             ConfigureComputerVision(services);
+            ConfigureAzureBlobStorage(services);
+
+            ConfigureDataStorage(services);
 
             services.AddControllersWithViews();
             services.AddAutoMapper(configAction =>
@@ -198,6 +203,23 @@ namespace FairPlayDating.Server
                     c.OperationFilter<SecurityRequirementsOperationFilter>();
                 });
             }
+        }
+
+        private void ConfigureDataStorage(IServiceCollection services)
+        {
+            DataStorageConfiguration dataStorageConfiguration =
+                            Configuration.GetRequiredSection(nameof(DataStorageConfiguration))
+                            .Get<DataStorageConfiguration>();
+            services.AddSingleton(dataStorageConfiguration);
+        }
+
+        private void ConfigureAzureBlobStorage(IServiceCollection services)
+        {
+            AzureBlobStorageConfiguration azureBlobStorageConfiguration =
+                            Configuration.GetRequiredSection(nameof(AzureBlobStorageConfiguration))
+                            .Get<AzureBlobStorageConfiguration>();
+            services.AddSingleton(azureBlobStorageConfiguration);
+            services.AddTransient<AzureBlobStorageService>();
         }
 
         private void ConfigureComputerVision(IServiceCollection services)
