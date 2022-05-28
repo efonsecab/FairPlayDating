@@ -8,7 +8,14 @@ namespace FairPlayDating.Server.AutoMapperProfiles
     {
         public MatchProfile()
         {
-            CreateMap<UserProfile, MatchModel>();
+            CreateMap<UserProfile, MatchModel>().AfterMap(afterFunction: 
+                (source,dest)=> 
+                {
+                    if (source.ProfileUserPhoto is not null)
+                    {
+                        dest.ProfilePhotoBlobUrl = source.ProfileUserPhoto.PhotoBlobUrl;
+                    }
+                });
         }
     }
 }

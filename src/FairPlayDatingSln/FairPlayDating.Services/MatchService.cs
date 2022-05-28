@@ -26,8 +26,10 @@ namespace FairPlayDating.Services
         public async Task<IQueryable<UserProfile>> GetMyMatchesAsync(CancellationToken cancellationToken)
         {
             var userObjectId = this._currentUserProvider.GetObjectId();
-            var myUserProfile = await this._fairPlayDatingDbContext.UserProfile.AsNoTracking()
+            var myUserProfile = await this._fairPlayDatingDbContext.UserProfile
+                .Include(p=>p.ProfileUserPhoto)
                 .Include(p => p.ApplicationUser)
+                .AsNoTracking()
                 .SingleOrDefaultAsync(p => p.ApplicationUser.AzureAdB2cobjectId.ToString() == userObjectId,
                 cancellationToken: cancellationToken);
             if (myUserProfile is null)

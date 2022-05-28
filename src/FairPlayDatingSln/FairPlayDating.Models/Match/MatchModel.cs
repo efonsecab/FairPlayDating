@@ -9,5 +9,6 @@ namespace FairPlayDating.Models.Match
     public class MatchModel
     {
         public long ApplicationUserId { get; set; }
+        public string? ProfilePhotoBlobUrl { get; set; }
     }
 }

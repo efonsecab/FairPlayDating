@@ -58,6 +58,7 @@ namespace FairPlayDating.Common.Global
         {
             public const string MyUserActivity = "/MyUserActivity";
             public const string MyUserProfile = "/MyUserProfile";
+            public const string MyMatches = "/MyMatches";
         }
 
         public static class ApiRoutes
