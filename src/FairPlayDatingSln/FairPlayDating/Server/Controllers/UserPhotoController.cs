@@ -48,7 +48,8 @@ namespace FairPlayDating.Server.Controllers
             var imageAnalysisResult = await computerVisionMicroservice.AnalyzeFromImageUrlAsync(photoUri, cancellationToken: cancellationToken);
             if (imageAnalysisResult.faces?.Length != 1)
             {
-                throw new CustomValidationException("Photo must contain exactly one face");
+                throw new CustomValidationException("We have been unanble to identify your face. " +
+                    "Please use another photo, and make sure it only has one person.");
             }
             if (imageAnalysisResult.adult?.isAdultContent == true)
             {

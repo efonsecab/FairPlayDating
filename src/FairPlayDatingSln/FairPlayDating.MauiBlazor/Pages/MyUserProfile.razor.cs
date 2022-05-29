@@ -93,7 +93,7 @@ namespace FairPlayDating.MauiBlazor.Pages
                     PickerTitle = "Select an image"
                 });
                 if (result is null)
-                    await App.Current.MainPage.DisplayAlert("File not selected", "Please select a file", "Ok");
+                    ToastService.ShowError("It seems you may have canceled the operation, please try again and select a photo of yourself");
                 else
                 {
                     var stream = await result.OpenReadAsync();
