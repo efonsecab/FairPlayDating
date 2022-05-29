@@ -26,6 +26,7 @@
                         {
                             <img class="img-thumbnail" src="@ProfileUserPhotoModel.PhotoBlobUrl" />
                         }
+                        <button type="button" class="btn btn-secondary" @onclick="ShowFileDialogAsync">Load File</button>
                     </div>
                 </div>
                 @if (this.AllHairColors != null)
@@ -241,4 +242,3 @@
         </div>
     </EditForm>
 }
-<button type="button" @onclick="ShowFileDialogAsync">Load File</button>

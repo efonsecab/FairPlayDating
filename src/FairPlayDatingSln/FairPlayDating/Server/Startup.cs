@@ -279,7 +279,7 @@ namespace FairPlayDating.Server
             }
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
                 app.UseWebAssemblyDebugging();
             }
             else

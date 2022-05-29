@@ -1,5 +1,7 @@
 ﻿using FairPlayDating.Common.CustomAttributes;
+using FairPlayDating.Common.CustomExceptions;
 using FairPlayDating.Common.Global;
+using FairPlayDating.Models.CustomHttpResponse;
 using FairPlayDating.Models.UserPhoto;
 using System;
 using System.Collections.Generic;
@@ -29,9 +31,19 @@ namespace FairPlayDating.ClientServices
                 //Send it
                 var authorzedHttpClient = this._httpClientService.CreateAuthorizedClient();
                 var response = await authorzedHttpClient.PostAsync(requestUrl, multipartFormContent);
-                response.EnsureSuccessStatusCode();
-                var result = await response.Content.ReadFromJsonAsync<UserPhotoModel>();
-                return result!;
+                if (!response.IsSuccessStatusCode)
+                {
+                    ProblemHttpResponse? problemHttpResponse = await response.Content.ReadFromJsonAsync<ProblemHttpResponse>();
+                    if (problemHttpResponse != null)
+                        throw new CustomValidationException(problemHttpResponse.Detail!);
+                    else
+                        throw new CustomValidationException(response.ReasonPhrase!);
+                }
+                else
+                {
+                    var result = await response.Content.ReadFromJsonAsync<UserPhotoModel>();
+                    return result!;
+                }
             }
         }
     }
