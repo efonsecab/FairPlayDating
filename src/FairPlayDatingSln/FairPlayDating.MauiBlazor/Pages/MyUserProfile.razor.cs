@@ -7,6 +7,7 @@ using FairPlayDating.Models.HairColor;
 using FairPlayDating.Models.KidStatus;
 using FairPlayDating.Models.Religion;
 using FairPlayDating.Models.TattooStatus;
+using FairPlayDating.Models.UserPhoto;
 using FairPlayDating.Models.UserProfile;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
@@ -46,7 +47,11 @@ namespace FairPlayDating.MauiBlazor.Pages
         private KidStatusClientService KidStatusClientService { get; set; }
         [Inject]
         private TattooStatusClientService TattooStatusClientService { get; set; }
+        [Inject]
+        private UserPhotoClientService UserPhotoClientService { get; set; }
         private bool IsLoading { get; set; }
+        private UserPhotoModel ProfileUserPhotoModel { get; set; }
+
         protected override async Task OnInitializedAsync()
         {
             IsLoading = true;
@@ -73,5 +78,23 @@ namespace FairPlayDating.MauiBlazor.Pages
             await Task.Yield();
             //await this.UserProfileClientService.UpdateMyUserProfileAsync(this.MyUserProfileModel);
         }
+
+        private async Task ShowFleDialog()
+        {
+            var result = await FilePicker.Default.PickAsync(options: new() 
+            {
+                FileTypes = FilePickerFileType.Jpeg,
+                PickerTitle = "Select an image"
+            });
+            if (result is null)
+                await App.Current.MainPage.DisplayAlert("File not selected", "Please select a file", "Ok");
+            else
+            {
+                var stream = await result.OpenReadAsync();
+                this.ProfileUserPhotoModel = await this.UserPhotoClientService.UploadMyPhotoAsync(stream);
+                this.MyUserProfileModel.ProfileUserPhotoId = this.ProfileUserPhotoModel.UserPhotoId;
+            }
+        }
     }
+
 }

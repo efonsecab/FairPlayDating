@@ -17,6 +17,17 @@
                         <InputTextArea class="form-control" @bind-Value="this.MyUserProfileModel.About" rows="5"></InputTextArea>
                     </div>
                 </div>
+                <div class="profilephoto-section">
+                    <div class="profilephoto-section-title">
+                        <h2>Profile Photo</h2>
+                    </div>
+                    <div class="profilephoto-section-content">
+                        @if (this.ProfileUserPhotoModel != null)
+                        {
+                            <img class="img-thumbnail" src="@ProfileUserPhotoModel.PhotoBlobUrl" />
+                        }
+                    </div>
+                </div>
                 @if (this.AllHairColors != null)
                 {
                     <div class="haircolor-section">
@@ -152,7 +163,7 @@
                     </InputSelect>
                 </div>
             </div>
-                }                
+                }
                 @if (this.AllKidStatus != null)
                 {
                     <div class="kidstatus-section">
@@ -230,3 +241,4 @@
         </div>
     </EditForm>
 }
+<button type="button" @onclick="ShowFleDialog">Load File</button>
