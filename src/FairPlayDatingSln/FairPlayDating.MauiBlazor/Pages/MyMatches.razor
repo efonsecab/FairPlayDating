@@ -1,1 +1,12 @@
-﻿
+﻿<OverlaySpinner ShowSpinner="IsLoading"></OverlaySpinner>
+@if (this.AllMyMatches != null)
+{
+    <div class="my-matches-grid">
+        @foreach (var singleMatch in this.AllMyMatches)
+        {
+            <div class="my-match-card">
+                <img class="img-thumbnail" src="@singleMatch.ProfilePhotoBlobUrl" />
+            </div>
+        }
+    </div>
+}

@@ -1,3 +1,4 @@
+using FairPlayDating.Common.CustomExceptions;
 using FairPlayDating.Common.Interfaces;
 using FairPlayDating.DataAccess.Data;
 using FairPlayDating.DataAccess.Models;
@@ -5,6 +6,11 @@ using FairPlayDating.Models.CustomHttpResponse;
 using FairPlayDating.Server.CustomProviders;
 using FairPlayDating.Server.Swagger.Filters;
 using FairPlayDating.Services;
+using FairPlayDating.Services.Configuration;
+using FairPlayDating.Services.Microservices.ComputerVision;
+using FairPlayDating.Services.Microservices.ComputerVision.Configuration;
+using FairPlayDating.Services.Microservices.FaceDetection;
+using FairPlayDating.Services.Microservices.FaceDetection.Configuration;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics;
@@ -45,7 +51,7 @@ namespace FairPlayDating.Server
 
             services.AddAuthentication(JwtBearerDefaults.AuthenticationScheme)
                 .AddMicrosoftIdentityWebApi(Configuration.GetSection("AzureAdB2C"));
-            services.Configure<MicrosoftIdentityOptions>(JwtBearerDefaults.AuthenticationScheme, options => 
+            services.Configure<MicrosoftIdentityOptions>(JwtBearerDefaults.AuthenticationScheme, options =>
             {
                 options.Scope.Add("user_photos");
             });
@@ -126,7 +132,7 @@ namespace FairPlayDating.Server
 
             services.AddTransient<CustomHttpClientHandler>();
             services.AddTransient<CustomHttpClient>();
-            services.AddTransient<FacebookGraphService>( sp=> 
+            services.AddTransient<FacebookGraphService>(sp =>
             {
                 var httpContextAccesor = sp.GetRequiredService<IHttpContextAccessor>();
                 var claims = httpContextAccesor.HttpContext.User.Claims;
@@ -152,6 +158,13 @@ namespace FairPlayDating.Server
             services.AddTransient<KidStatusService>();
             services.AddTransient<TattooStatusService>();
             services.AddTransient<MatchService>();
+            services.AddTransient<UserPhotoService>();
+
+            ConfigureFaceDetection(services);
+            ConfigureComputerVision(services);
+            ConfigureAzureBlobStorage(services);
+
+            ConfigureDataStorage(services);
 
             services.AddControllersWithViews();
             services.AddAutoMapper(configAction =>
@@ -167,6 +180,7 @@ namespace FairPlayDating.Server
                 var azureAdB2CDomain = Configuration["AzureAdB2C:Domain"];
                 var azureAdB2CClientAppClientId = Configuration["AzureAdB2C:ClientAppClientId"];
                 var azureAdB2ClientAppDefaultScope = Configuration["AzureAdB2C:ClientAppDefaultScope"];
+                services.AddEndpointsApiExplorer();
                 services.AddSwaggerGen(c =>
                 {
                     c.SwaggerDoc("v1", new Microsoft.OpenApi.Models.OpenApiInfo { Title = "FairPlayDating API" });
@@ -190,6 +204,41 @@ namespace FairPlayDating.Server
                     c.OperationFilter<SecurityRequirementsOperationFilter>();
                 });
             }
+        }
+
+        private void ConfigureDataStorage(IServiceCollection services)
+        {
+            DataStorageConfiguration dataStorageConfiguration =
+                            Configuration.GetRequiredSection(nameof(DataStorageConfiguration))
+                            .Get<DataStorageConfiguration>();
+            services.AddSingleton(dataStorageConfiguration);
+        }
+
+        private void ConfigureAzureBlobStorage(IServiceCollection services)
+        {
+            AzureBlobStorageConfiguration azureBlobStorageConfiguration =
+                            Configuration.GetRequiredSection(nameof(AzureBlobStorageConfiguration))
+                            .Get<AzureBlobStorageConfiguration>();
+            services.AddSingleton(azureBlobStorageConfiguration);
+            services.AddTransient<AzureBlobStorageService>();
+        }
+
+        private void ConfigureComputerVision(IServiceCollection services)
+        {
+            ComputerVisionMicroserviceConfiguration computerVisionMicroserviceConfiguration =
+                            Configuration.GetRequiredSection(nameof(ComputerVisionMicroserviceConfiguration))
+                            .Get<ComputerVisionMicroserviceConfiguration>();
+            services.AddSingleton(computerVisionMicroserviceConfiguration);
+            services.AddTransient<ComputerVisionMicroservice>();
+        }
+
+        private void ConfigureFaceDetection(IServiceCollection services)
+        {
+            FaceDetectionMicroserviceConfiguration faceDetectionMicroserviceConfiguration =
+                            Configuration.GetSection(nameof(FaceDetectionMicroserviceConfiguration))
+                            .Get<FaceDetectionMicroserviceConfiguration>();
+            services.AddSingleton(faceDetectionMicroserviceConfiguration);
+            services.AddTransient<FaceDetectionMicroservice>();
         }
 
         private FairPlayDatingDbContext CreateFairPlayDatingDbContext(IServiceCollection services)
@@ -230,7 +279,7 @@ namespace FairPlayDating.Server
             }
             if (env.IsDevelopment())
             {
-                app.UseDeveloperExceptionPage();
+                //app.UseDeveloperExceptionPage();
                 app.UseWebAssemblyDebugging();
             }
             else
@@ -274,7 +323,9 @@ namespace FairPlayDating.Server
                 });
             });
 
-            //app.UseHttpsRedirection();
+            HandleExceptions(app);
+            
+            app.UseHttpsRedirection();
             app.UseBlazorFrameworkFiles();
             app.UseStaticFiles();
 
@@ -296,5 +347,63 @@ namespace FairPlayDating.Server
             var currentUserProvider = serviceProvider.GetService<ICurrentUserProvider>();
             return ConfigureFairPlayDatingDataContext(currentUserProvider);
         }
+
+        private async Task<long?> LogException(HttpContext context, Exception error, long? errorId)
+        {
+            try
+            {
+                FairPlayDatingDbContext fairPlayDatingDbContext =
+                this.CreateFairPlayDatingDbContext(context.RequestServices);
+                ErrorLog errorLog = new()
+                {
+                    FullException = error.ToString(),
+                    StackTrace = error.StackTrace,
+                    Message = error.Message
+                };
+                await fairPlayDatingDbContext.ErrorLog.AddAsync(errorLog);
+                await fairPlayDatingDbContext.SaveChangesAsync();
+                errorId = errorLog.ErrorLogId;
+            }
+            catch (Exception)
+            {
+                throw;
+            }
+            ProblemHttpResponse problemHttpResponse = new();
+            if (error is CustomValidationException)
+            {
+                problemHttpResponse.Detail = error.Message;
+            }
+            else
+            {
+                string userVisibleError = "An error ocurred.";
+                if (errorId.HasValue)
+                {
+                    userVisibleError += $" Error code: {errorId}";
+                }
+                problemHttpResponse.Detail = userVisibleError;
+            }
+            problemHttpResponse.Status = (int)System.Net.HttpStatusCode.BadRequest;
+            await context.Response.WriteAsJsonAsync<ProblemHttpResponse>(problemHttpResponse);
+            return errorId;
+        }
+
+        private void HandleExceptions(IApplicationBuilder app)
+        {
+            app.UseExceptionHandler(cfg =>
+            {
+                cfg.Run(async context =>
+                {
+                    var exceptionHandlerPathFeature =
+                    context.Features.Get<IExceptionHandlerPathFeature>();
+                    var error = exceptionHandlerPathFeature.Error;
+                    long? errorId = default;
+                    if (error != null)
+                    {
+                        errorId = await LogException(context, error, errorId);
+                    }
+                });
+            });
+        }
+
     }
 }

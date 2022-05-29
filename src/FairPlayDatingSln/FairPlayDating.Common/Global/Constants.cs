@@ -17,6 +17,7 @@ namespace FairPlayDating.Common.Global
             public const string Religion = nameof(Religion);
             public const string KidStatus = nameof(KidStatus);
             public const string TattooStatus = nameof(TattooStatus);
+            public const string UserPhoto = nameof(UserPhoto);
         }
         public class Names
         {
@@ -57,12 +58,18 @@ namespace FairPlayDating.Common.Global
         {
             public const string MyUserActivity = "/MyUserActivity";
             public const string MyUserProfile = "/MyUserProfile";
+            public const string MyMatches = "/MyMatches";
         }
 
         public static class ApiRoutes
         {
             public const string GetMyPhotos = "api/Facebook/GetMyPhotos";
             public const string GetMyAlbums = "api/Facebook/GetMyAlbums";
+
+            public static class ApplicationUserController
+            {
+                public const string GetMyRoles = "api/ApplicationUser/GetMyRoles";
+            }
         }
     }
 }

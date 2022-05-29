@@ -59,6 +59,11 @@ namespace FairPlayDating.MauiBlazor.Shared
             this.NavigationManager.NavigateTo(Constants.MauiBlazorAppRoutes.MyUserProfile);
         }
 
+        private void OnMyMatchesButtonClicked()
+        {
+            this.NavigationManager.NavigateTo(Constants.MauiBlazorAppRoutes.MyMatches);
+        }
+
         private async void OnLogoutButtonClicked()
         {
             UserState.UserContext = new UserContext();

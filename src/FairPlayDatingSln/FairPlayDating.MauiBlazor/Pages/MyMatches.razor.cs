@@ -1,5 +1,8 @@
-﻿using FairPlayDating.ClientServices;
+﻿using Blazored.Toast.Services;
+using FairPlayDating.ClientServices;
+using FairPlayDating.Common.Global;
 using FairPlayDating.Models.Match;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Components;
 using System;
 using System.Collections.Generic;
@@ -9,15 +12,31 @@ using System.Threading.Tasks;
 
 namespace FairPlayDating.MauiBlazor.Pages
 {
+    [Route(Constants.MauiBlazorAppRoutes.MyMatches)]
+    [Authorize]
     public partial class MyMatches
     {
-        public MatchModel[] AllMyMatches { get; private set; }
         [Inject]
         private MatchClientService MatchClientService { get; set; }
+        [Inject]
+        private IToastService ToastService { get; set; }
+        private MatchModel[] AllMyMatches { get; set; }
+        private bool IsLoading { get; set; }
 
         protected override async Task OnInitializedAsync()
         {
-            this.AllMyMatches = await this.MatchClientService.GetMyMatchesAsync();
+            try
+            {
+                this.AllMyMatches = await this.MatchClientService.GetMyMatchesAsync();
+            }
+            catch (Exception ex)
+            {
+                ToastService.ShowError(ex.Message);
+            }
+            finally
+            {
+                IsLoading = false;
+            }
         }
     }
 }
