@@ -1,4 +1,5 @@
-﻿using FairPlayDating.ClientServices;
+﻿using Blazored.Toast.Services;
+using FairPlayDating.ClientServices;
 using FairPlayDating.Common.Global;
 using FairPlayDating.Models.DateObjective;
 using FairPlayDating.Models.EyesColor;
@@ -23,14 +24,6 @@ namespace FairPlayDating.MauiBlazor.Pages
     [Authorize]
     public partial class MyUserProfile
     {
-        public UserProfileModel MyUserProfileModel { get; private set; }
-        public HairColorModel[] AllHairColors { get; private set; }
-        public EyesColorModel[] AllEyesColors { get; private set; }
-        public GenderModel[] AllGenders { get; private set; }
-        public DateObjectiveModel[] AllDateObjectives { get; private set; }
-        public ReligionModel[] AllReligions { get; private set; }
-        public KidStatusModel[] AllKidStatus { get; private set; }
-        public TattooStatusModel[] AllTatooStatus { get; private set; }
         [Inject]
         private UserProfileClientService UserProfileClientService { get; set; }
         [Inject]
@@ -49,6 +42,16 @@ namespace FairPlayDating.MauiBlazor.Pages
         private TattooStatusClientService TattooStatusClientService { get; set; }
         [Inject]
         private UserPhotoClientService UserPhotoClientService { get; set; }
+        [Inject]
+        private IToastService ToastService { get; set; }
+        public UserProfileModel MyUserProfileModel { get; private set; }
+        public HairColorModel[] AllHairColors { get; private set; }
+        public EyesColorModel[] AllEyesColors { get; private set; }
+        public GenderModel[] AllGenders { get; private set; }
+        public DateObjectiveModel[] AllDateObjectives { get; private set; }
+        public ReligionModel[] AllReligions { get; private set; }
+        public KidStatusModel[] AllKidStatus { get; private set; }
+        public TattooStatusModel[] AllTatooStatus { get; private set; }
         private bool IsLoading { get; set; }
         private UserPhotoModel ProfileUserPhotoModel { get; set; }
 
@@ -79,20 +82,32 @@ namespace FairPlayDating.MauiBlazor.Pages
             //await this.UserProfileClientService.UpdateMyUserProfileAsync(this.MyUserProfileModel);
         }
 
-        private async Task ShowFleDialog()
+        private async Task ShowFileDialogAsync()
         {
-            var result = await FilePicker.Default.PickAsync(options: new() 
+            try
             {
-                FileTypes = FilePickerFileType.Jpeg,
-                PickerTitle = "Select an image"
-            });
-            if (result is null)
-                await App.Current.MainPage.DisplayAlert("File not selected", "Please select a file", "Ok");
-            else
+                IsLoading = true;
+                var result = await FilePicker.Default.PickAsync(options: new()
+                {
+                    FileTypes = FilePickerFileType.Jpeg,
+                    PickerTitle = "Select an image"
+                });
+                if (result is null)
+                    await App.Current.MainPage.DisplayAlert("File not selected", "Please select a file", "Ok");
+                else
+                {
+                    var stream = await result.OpenReadAsync();
+                    this.ProfileUserPhotoModel = await this.UserPhotoClientService.UploadMyPhotoAsync(stream);
+                    this.MyUserProfileModel.ProfileUserPhotoId = this.ProfileUserPhotoModel.UserPhotoId;
+                }
+            }
+            catch (Exception ex)
             {
-                var stream = await result.OpenReadAsync();
-                this.ProfileUserPhotoModel = await this.UserPhotoClientService.UploadMyPhotoAsync(stream);
-                this.MyUserProfileModel.ProfileUserPhotoId = this.ProfileUserPhotoModel.UserPhotoId;
+                ToastService.ShowError(ex.Message);
+            }
+            finally
+            {
+                IsLoading = false;
             }
         }
     }
