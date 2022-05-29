@@ -1,6 +1,8 @@
 ﻿using Blazored.Toast;
 using FairPlayDating.ClientServices;
 using FairPlayDating.Common.Global;
+using FairPlayDating.Common.Interfaces;
+using FairPlayDating.MauiBlazor.AgnosticImplementations;
 using FairPlayDating.MauiBlazor.Authentication;
 using FairPlayDating.MauiBlazor.Data;
 using FairPlayDating.MauiBlazor.Features.LogOn;
@@ -44,6 +46,7 @@ namespace FairPlayDating.MauiBlazor
             B2CConstants b2CConstants = builder.Configuration.GetSection("B2CConstants").Get<B2CConstants>();
             builder.Services.AddSingleton(b2CConstants);
             builder.Services.AddSingleton<WeatherForecastService>();
+            builder.Services.AddSingleton<IGeoLocationProvider, GeoLocationProvider>();
 
             services.AddScoped<BaseAddressAuthorizationMessageHandler>();
             services.AddHttpClient($"{assemblyName}.ServerAPI", client =>
@@ -61,7 +64,7 @@ namespace FairPlayDating.MauiBlazor
             services.AddScoped(sp => sp.GetRequiredService<IHttpClientFactory>()
                 .CreateClient($"{assemblyName}.ServerAPI.Anonymous"));
 
-
+            
             services.AddTransient<HttpClientService>();
             services.AddTransient<FacebookClientService>();
             services.AddTransient<ActivityClientService>();

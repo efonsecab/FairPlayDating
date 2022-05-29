@@ -1,6 +1,7 @@
 ﻿using Blazored.Toast.Services;
 using FairPlayDating.ClientServices;
 using FairPlayDating.Common.Global;
+using FairPlayDating.Common.Interfaces;
 using FairPlayDating.Models.DateObjective;
 using FairPlayDating.Models.EyesColor;
 using FairPlayDating.Models.Gender;
@@ -52,6 +53,8 @@ namespace FairPlayDating.MauiBlazor.Pages
         public ReligionModel[] AllReligions { get; private set; }
         public KidStatusModel[] AllKidStatus { get; private set; }
         public TattooStatusModel[] AllTatooStatus { get; private set; }
+        [Inject]
+        private IGeoLocationProvider LocationProvider { get; set; }
         private bool IsLoading { get; set; }
         private UserPhotoModel ProfileUserPhotoModel { get; set; }
 
@@ -73,6 +76,9 @@ namespace FairPlayDating.MauiBlazor.Pages
             this.AllReligions = await this.ReligionClientService.GetAllReligionAsync();
             this.AllKidStatus = await this.KidStatusClientService.GetAllKidStatusAsync();
             this.AllTatooStatus = await this.TattooStatusClientService.GetAllTattooStatusAsync();
+            var location = await this.LocationProvider.GetCurrentPositionAsync();
+            this.MyUserProfileModel.CurrentLatitude = location.Latitude;
+            this.MyUserProfileModel.CurrentLongitude = location.Longitude;
             IsLoading = false;
         }
 
