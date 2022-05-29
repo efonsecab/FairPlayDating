@@ -65,6 +65,11 @@ namespace FairPlayDating.Common.Global
         {
             public const string GetMyPhotos = "api/Facebook/GetMyPhotos";
             public const string GetMyAlbums = "api/Facebook/GetMyAlbums";
+
+            public static class ApplicationUserController
+            {
+                public const string GetMyRoles = "api/ApplicationUser/GetMyRoles";
+            }
         }
     }
 }
