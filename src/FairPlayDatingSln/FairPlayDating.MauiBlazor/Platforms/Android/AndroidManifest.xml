@@ -6,13 +6,13 @@
 				<action android:name="android.intent.action.VIEW" />
 				<category android:name="android.intent.category.DEFAULT" />
 				<category android:name="android.intent.category.BROWSABLE" />
-				<data android:scheme="msal110facd2-07c2-4ecd-80e4-aeb3627100cf" android:host="auth" />
+				<data android:scheme="msal7f5c4f6a-1ceb-44ac-a6dc-8857e01753d8" android:host="auth" />
 			</intent-filter>
 		</activity>
 	</application>
 	<queries>
 		<package android:name="com.azure.authenticator" />
-		<package android:name="com.pticostarica.fairplaytube" />
+		<package android:name="com.pticostarica.fairplaydating" />
 		<package android:name="com.microsoft.windowsintune.companyportal" />
 		<!-- Required for API Level 30 to make sure we can detect browsers
     (that don't support custom tabs) -->

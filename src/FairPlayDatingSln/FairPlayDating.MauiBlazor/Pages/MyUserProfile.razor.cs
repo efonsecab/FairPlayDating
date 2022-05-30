@@ -65,8 +65,9 @@ namespace FairPlayDating.MauiBlazor.Pages
             {
                 this.MyUserProfileModel = await this.UserProfileClientService.GetMyUserProfileAsync();
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                ToastService.ShowError(ex.Message);
                 this.MyUserProfileModel = new();
             }
             this.AllHairColors = await this.HairColorClientService.GetAllHairColorAsync();

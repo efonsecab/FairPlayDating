@@ -29,8 +29,16 @@ namespace FairPlayDating.MauiBlazor.Shared
                     .AcquireTokenSilent(B2CConstants.ApiScopesArray, currentUserAccount)
                     .ExecuteAsync();
 
+                UserState.UserContext = new UserContext()
+                {
+                    AccessToken = authResult.AccessToken,
+                    IsLoggedOn = true,
+                    UserIdentifier = authResult.UniqueId,
+                    Idp_Access_Token = authResult.ClaimsPrincipal.Claims.Single(p => p.Type == "idp_access_token").Value
+                };
                 DisplayBasicTokenInfo(authResult);
                 UpdateSignInState(true);
+                await OnLoginSuccess.InvokeAsync();
             }
             catch (MsalUiRequiredException)
             {
