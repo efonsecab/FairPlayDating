@@ -70,6 +70,18 @@ namespace FairPlayDating.Common.Global
             {
                 public const string GetMyRoles = "api/ApplicationUser/GetMyRoles";
             }
+
+            public static class UserActivityController
+            {
+                public const string GetMyUserActivities = "api/UserActivity/GetMyUserActivities";
+                public const string UpdateMyUserActivity = "api/UserActivity/UpdateMyUserActivity";
+            }
+
+            public static class UserPhotoController
+            {
+                public const string UploadMyPhoto = "api/UserPhoto/UploadMyPhoto";
+                public const string GetMyUserProfile = "api/UserProfile/GetMyUserProfile";
+            }
         }
     }
 }

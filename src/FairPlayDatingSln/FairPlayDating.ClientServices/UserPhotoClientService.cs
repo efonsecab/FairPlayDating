@@ -10,7 +10,7 @@ using System.Net.Http.Headers;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
-
+using static FairPlayDating.Common.Global.Constants.ApiRoutes.UserPhotoController;
 namespace FairPlayDating.ClientServices
 {
     [ClientServiceOfEntity(entityName: Constants.EntityNames.UserPhoto, primaryKeyType: typeof(long))]
@@ -18,7 +18,6 @@ namespace FairPlayDating.ClientServices
     {
         public async Task<UserPhotoModel> UploadMyPhotoAsync(Stream photoStream)
         {
-            var requestUrl = "api/UserPhoto/UploadMyPhoto";
             using (var multipartFormContent = new MultipartFormDataContent())
             {
                 //Load the file and set the file's Content-Type header
@@ -30,7 +29,7 @@ namespace FairPlayDating.ClientServices
 
                 //Send it
                 var authorzedHttpClient = this._httpClientService.CreateAuthorizedClient();
-                var response = await authorzedHttpClient.PostAsync(requestUrl, multipartFormContent);
+                var response = await authorzedHttpClient.PostAsync(UploadMyPhoto, multipartFormContent);
                 if (!response.IsSuccessStatusCode)
                 {
                     ProblemHttpResponse? problemHttpResponse = await response.Content.ReadFromJsonAsync<ProblemHttpResponse>();

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Net.Http.Json;
 using System.Text;
 using System.Threading.Tasks;
-
+using static FairPlayDating.Common.Global.Constants.ApiRoutes.UserPhotoController;
 namespace FairPlayDating.ClientServices
 {
     [ClientServiceOfEntity(entityName: Constants.EntityNames.UserProfile, primaryKeyType: typeof(long))]
@@ -16,9 +16,8 @@ namespace FairPlayDating.ClientServices
         public async Task<UserProfileModel?> GetMyUserProfileAsync()
         {
             var authorizedHttpClient = _httpClientService.CreateAuthorizedClient();
-            var requestUrl = "api/UserProfile/GetMyUserProfile";
             var result = await authorizedHttpClient
-                .GetFromJsonAsync<UserProfileModel?>(requestUrl);
+                .GetFromJsonAsync<UserProfileModel?>(GetMyUserProfile);
             return result;
         }
     }
