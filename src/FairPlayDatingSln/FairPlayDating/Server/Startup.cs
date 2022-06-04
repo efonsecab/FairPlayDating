@@ -254,8 +254,12 @@ namespace FairPlayDating.Server
                 new();
             FairPlayDatingDbContext fairplaydatingDatabaseContext =
             new(dbContextOptionsBuilder.UseSqlServer(Configuration.GetConnectionString("Default"),
-            sqlServerOptionsAction: (serverOptions) => serverOptions
-            .EnableRetryOnFailure(3, TimeSpan.FromSeconds(5), null)).Options,
+            sqlServerOptionsAction: (serverOptions) => 
+            {
+                serverOptions
+                            .EnableRetryOnFailure(3, TimeSpan.FromSeconds(5), null);
+                serverOptions.UseNetTopologySuite();
+            }).Options,
             currentUserProvider);
             return fairplaydatingDatabaseContext;
         }

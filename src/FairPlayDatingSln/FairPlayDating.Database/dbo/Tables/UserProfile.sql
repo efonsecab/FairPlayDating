@@ -18,6 +18,7 @@
     [PreferredKidStatusId] SMALLINT NOT NULL, 
     [TattooStatusId] SMALLINT NOT NULL, 
     [PreferredTattooStatusId] SMALLINT NOT NULL, 
+    [CurrentGeoLocation] [sys].[geography] NOT NULL, 
     CONSTRAINT [FK_UserProfile_HairColor] FOREIGN KEY ([HairColorId]) REFERENCES [HairColor]([HairColorId]),
 	CONSTRAINT [FK_UserProfile_PreferredHairColor] FOREIGN KEY ([PreferredHairColorId]) REFERENCES [HairColor]([HairColorId]),
     CONSTRAINT [FK_UserProfile_EyesColor] FOREIGN KEY ([EyesColorId]) REFERENCES [EyesColor]([EyesColorId]),
