@@ -23,6 +23,7 @@ namespace FairPlayDating.DataAccess.Data
         public virtual DbSet<ApplicationRole> ApplicationRole { get; set; }
         public virtual DbSet<ApplicationUser> ApplicationUser { get; set; }
         public virtual DbSet<ApplicationUserRole> ApplicationUserRole { get; set; }
+        public virtual DbSet<ApplicationUserVouch> ApplicationUserVouch { get; set; }
         public virtual DbSet<DateObjective> DateObjective { get; set; }
         public virtual DbSet<ErrorLog> ErrorLog { get; set; }
         public virtual DbSet<EyesColor> EyesColor { get; set; }
@@ -56,6 +57,11 @@ namespace FairPlayDating.DataAccess.Data
                     .HasForeignKey<ApplicationUserRole>(d => d.ApplicationUserId)
                     .OnDelete(DeleteBehavior.ClientSetNull)
                     .HasConstraintName("FK_ApplicationUserRole_ApplicationUser");
+            });
+
+            modelBuilder.Entity<ApplicationUserVouch>(entity =>
+            {
+                entity.Property(e => e.ApplicationUserVouchId).ValueGeneratedNever();
             });
 
             modelBuilder.Entity<DateObjective>(entity =>

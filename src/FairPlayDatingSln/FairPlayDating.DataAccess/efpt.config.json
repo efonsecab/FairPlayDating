@@ -30,6 +30,10 @@
          "ObjectType": 0
       },
       {
+         "Name": "[dbo].[ApplicationUserVouch]",
+         "ObjectType": 0
+      },
+      {
          "Name": "[dbo].[DateObjective]",
          "ObjectType": 0
       },
