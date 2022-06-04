@@ -44,7 +44,7 @@ namespace FairPlayDating.Services
                     p.KidStatusId == myUserProfile.PreferredKidStatusId &&
                     p.ReligionId == myUserProfile.PreferredReligionId && 
                     p.TattooStatusId == myUserProfile.PreferredTattooStatusId
-                ));
+                )).OrderBy(p=>p.CurrentGeoLocation.Distance(myUserProfile.CurrentGeoLocation));
             return result;
         }
     }
