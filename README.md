@@ -6,7 +6,8 @@
 
 Hopefully this project is very useful to you.
 
-In order to keep the project free, you can help with some of the costs using the Sponsos link.
+In order to keep the project free, you can help with some of the costs using the Sponsos link. Preferrably supporting me on BuyMeACoffee 
+https://www.buymeacoffee.com/efonsecab
 
 ## Contributors ✨
 
